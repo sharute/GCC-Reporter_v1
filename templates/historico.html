@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Histórico | Gestão de Comunicados - GCC Repórter</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 25%, #e0e7ff 50%, #ede9fe 75%, #e0f2fe 100%);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             position: relative;
         }
+
         body::before {
             content: '';
             position: fixed;
@@ -22,13 +30,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
                 radial-gradient(circle at 40% 20%, rgba(139, 92, 246, 0.06) 0%, transparent 50%);
             pointer-events: none;
             z-index: 0;
         }
+
         body::after {
             content: '';
             position: fixed;
@@ -36,21 +45,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px),
                 repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
             pointer-events: none;
             z-index: 0;
         }
+
         @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
+
         .page-content {
             position: relative;
             z-index: 1;
         }
-        
+
         /* ========== HEADER PREMIUM GCC REPÓRTER ========== */
         .header {
             background: linear-gradient(135deg, rgba(14, 165, 233, 0.95) 0%, rgba(59, 130, 246, 0.95) 50%, rgba(99, 102, 241, 0.95) 100%);
@@ -62,6 +80,7 @@
             box-shadow: 0 4px 24px rgba(14, 165, 233, 0.25), 0 2px 8px rgba(59, 130, 246, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             border-bottom: 2px solid rgba(255, 255, 255, 0.2);
         }
+
         .header::before {
             content: '';
             position: absolute;
@@ -73,18 +92,29 @@
             background-size: 300% 100%;
             animation: shimmer-border 4s ease-in-out infinite;
         }
+
         @keyframes shimmer-border {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
         }
+
         @keyframes logoShine {
             0% {
                 transform: translateX(-100%) translateY(-100%) rotate(45deg);
             }
+
             100% {
                 transform: translateX(100%) translateY(100%) rotate(45deg);
             }
         }
+
         .header-inner {
             max-width: 1920px;
             margin: 0 auto;
@@ -94,6 +124,7 @@
             align-items: center;
             position: relative;
         }
+
         .header-inner::after {
             content: '';
             position: absolute;
@@ -103,6 +134,7 @@
             height: 1px;
             background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%);
         }
+
         .header-brand {
             display: flex;
             align-items: center;
@@ -110,9 +142,11 @@
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
         }
+
         .header-brand:hover {
             transform: translateX(3px);
         }
+
         .brand-logo {
             width: 56px;
             height: 56px;
@@ -129,6 +163,7 @@
             padding: 10px;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .brand-logo::before {
             content: '';
             position: absolute;
@@ -136,25 +171,26 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, 
-                transparent 0%, 
-                rgba(59, 130, 246, 0.3) 20%,
-                rgba(99, 102, 241, 0.5) 35%,
-                rgba(139, 92, 246, 0.6) 50%,
-                rgba(99, 102, 241, 0.5) 65%,
-                rgba(59, 130, 246, 0.3) 80%,
-                transparent 100%);
+            background: linear-gradient(45deg,
+                    transparent 0%,
+                    rgba(59, 130, 246, 0.3) 20%,
+                    rgba(99, 102, 241, 0.5) 35%,
+                    rgba(139, 92, 246, 0.6) 50%,
+                    rgba(99, 102, 241, 0.5) 65%,
+                    rgba(59, 130, 246, 0.3) 80%,
+                    transparent 100%);
             transform: translateX(-100%) translateY(-100%) rotate(45deg);
             transition: transform 0.8s;
             opacity: 0;
         }
+
         .brand-logo::after {
             content: '';
             position: absolute;
             inset: 0;
             border-radius: 16px;
             padding: 2px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -162,26 +198,30 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
+
         .brand-logo:hover {
             transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4), 
-                        0 6px 16px rgba(99, 102, 241, 0.3), 
-                        0 0 40px rgba(139, 92, 246, 0.2),
-                        inset 0 1px 0 rgba(255, 255, 255, 1);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.4),
+                0 6px 16px rgba(99, 102, 241, 0.3),
+                0 0 40px rgba(139, 92, 246, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
             background: rgba(255, 255, 255, 1);
             border-color: rgba(99, 102, 241, 0.4);
         }
+
         .brand-logo:hover::before {
             opacity: 1;
             animation: logoShine 1.5s ease-in-out infinite;
         }
+
         .brand-logo:hover::after {
             opacity: 1;
-            background: linear-gradient(135deg, 
-                rgba(59, 130, 246, 0.4), 
-                rgba(99, 102, 241, 0.3), 
-                rgba(139, 92, 246, 0.2));
+            background: linear-gradient(135deg,
+                    rgba(59, 130, 246, 0.4),
+                    rgba(99, 102, 241, 0.3),
+                    rgba(139, 92, 246, 0.2));
         }
+
         .brand-logo img {
             max-width: 100%;
             max-height: 100%;
@@ -193,15 +233,18 @@
             z-index: 1;
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), filter 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
         .brand-logo:hover img {
             transform: scale(1.05) rotate(2deg);
             filter: brightness(0) saturate(100%) invert(40%) sepia(100%) saturate(2000%) hue-rotate(210deg) brightness(0.95) contrast(1.1) drop-shadow(0 0 8px rgba(59, 130, 246, 0.8));
         }
+
         .brand-text {
             display: flex;
             flex-direction: column;
             gap: 3px;
         }
+
         .brand-text h1 {
             font-size: 26px;
             font-weight: 900;
@@ -212,6 +255,7 @@
             position: relative;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 20px rgba(255, 255, 255, 0.3);
         }
+
         .brand-text h1::after {
             content: '';
             position: absolute;
@@ -222,9 +266,11 @@
             background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.5));
             transition: width 0.4s ease;
         }
+
         .header-brand:hover .brand-text h1::after {
             width: 100%;
         }
+
         .brand-text .tagline {
             font-size: 11px;
             color: rgba(255, 255, 255, 0.9);
@@ -235,12 +281,13 @@
             position: relative;
             padding-left: 2px;
         }
+
         .brand-text .tagline::before {
             content: '📊';
             margin-right: 4px;
             font-size: 10px;
         }
-        
+
         /* Navegação Premium */
         .header-nav {
             display: flex;
@@ -252,6 +299,7 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.1);
         }
+
         .nav-item {
             padding: 12px 22px;
             border-radius: 12px;
@@ -270,6 +318,7 @@
             position: relative;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
+
         .nav-item::before {
             content: '';
             position: absolute;
@@ -279,15 +328,18 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
+
         .nav-item:hover {
             color: #ffffff;
             background: rgba(255, 255, 255, 0.25);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), 0 2px 6px rgba(0, 0, 0, 0.15);
         }
+
         .nav-item:hover::before {
             opacity: 1;
         }
+
         .nav-item.active {
             background: rgba(255, 255, 255, 0.95);
             color: #0ea5e9;
@@ -295,13 +347,16 @@
             transform: translateY(-2px);
             text-shadow: none;
         }
+
         .nav-item.active::before {
             opacity: 0;
         }
+
         .nav-item.active .nav-icon {
             transform: scale(1.15);
             filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
         }
+
         .nav-item .nav-icon {
             font-size: 16px;
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -309,62 +364,90 @@
             align-items: center;
             justify-content: center;
         }
+
         .nav-item:hover .nav-icon {
             transform: scale(1.15) rotate(5deg);
         }
-        
+
         /* Responsivo Header */
         @media (max-width: 1024px) {
-            .header-inner { padding: 16px 24px; }
-            .header-nav { display: none; }
-            .brand-logo { width: 50px; height: 50px; }
-            .brand-logo img { height: 30px; }
-            .brand-text h1 { font-size: 22px; }
+            .header-inner {
+                padding: 16px 24px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            .brand-logo {
+                width: 50px;
+                height: 50px;
+            }
+
+            .brand-logo img {
+                height: 30px;
+            }
+
+            .brand-text h1 {
+                font-size: 22px;
+            }
         }
-        
+
         /* Responsivo Cards */
         @media (max-width: 768px) {
             .comunicado-header {
                 flex-direction: column;
                 gap: 16px;
             }
+
             .comunicado-header-right {
                 width: 100%;
             }
+
             .comunicado-buttons {
                 justify-content: flex-start;
             }
+
             .menu-dropdown {
                 right: auto;
                 left: 0;
             }
         }
-        
+
         /* ========== FIM HEADER ========== */
-        
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; position: relative; z-index: 1; }
-        .panel { 
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .panel {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 28px; 
-            border-radius: 16px; 
+            padding: 28px;
+            border-radius: 16px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.8);
             position: relative;
             z-index: 1;
             overflow: visible;
         }
-        .comunicado-item { 
-            padding: 22px; 
-            border: 1px solid #e2e8f0; 
-            border-radius: 16px; 
-            margin-bottom: 16px; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+
+        .comunicado-item {
+            padding: 22px;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
             position: relative;
             overflow: visible;
         }
+
         .comunicado-item::before {
             content: '';
             position: absolute;
@@ -377,25 +460,30 @@
             transform-origin: left;
             transition: transform 0.3s ease;
         }
-        .comunicado-item:hover { 
+
+        .comunicado-item:hover {
             box-shadow: 0 8px 24px rgba(14, 165, 233, 0.12), 0 4px 8px rgba(14, 165, 233, 0.08);
             border-color: #c7d2fe;
             transform: translateY(-2px);
         }
+
         .comunicado-item:hover::before {
             transform: scaleX(1);
         }
-        .comunicado-header { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: flex-start; 
+
+        .comunicado-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 10px;
             gap: 20px;
         }
+
         .comunicado-header-left {
             flex: 1;
             min-width: 0;
         }
+
         .comunicado-header-right {
             flex-shrink: 0;
             display: flex;
@@ -404,38 +492,48 @@
             position: relative;
             z-index: 1;
         }
-        .comunicado-title { font-size: 17px; font-weight: 700; color: #1e293b; }
-        .comunicado-codigo { 
-            font-size: 13px; 
-            font-weight: 700; 
-            color: #0ea5e9; 
+
+        .comunicado-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .comunicado-codigo {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0ea5e9;
             margin-bottom: 6px;
             letter-spacing: 0.3px;
         }
-        .comunicado-subtitle { 
-            font-size: 14px; 
-            color: #64748b; 
+
+        .comunicado-subtitle {
+            font-size: 14px;
+            color: #64748b;
             margin-top: 6px;
             line-height: 1.5;
         }
-        .comunicado-meta { 
-            font-size: 12px; 
-            color: #94a3b8; 
+
+        .comunicado-meta {
+            font-size: 12px;
+            color: #94a3b8;
             margin-top: 10px;
             line-height: 1.6;
         }
+
         .tag-badge:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);
         }
-        .btn { 
-            padding: 5px 10px; 
-            border: none; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            font-size: 11px; 
-            font-weight: 600; 
-            transition: all 0.2s ease; 
+
+        .btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.2s ease;
             margin: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -449,11 +547,13 @@
             width: 100%;
             white-space: nowrap;
         }
+
         .comunicado-buttons {
             position: relative;
             display: flex;
             justify-content: flex-end;
         }
+
         .menu-hamburguer {
             background: #475569;
             color: white;
@@ -468,10 +568,12 @@
             transition: all 0.2s ease;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
+
         .menu-hamburguer:hover {
             background: #334155;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
         }
+
         .menu-dropdown {
             display: none;
             position: absolute;
@@ -486,9 +588,11 @@
             overflow: visible;
             max-height: none;
         }
+
         .menu-dropdown.show {
             display: block;
         }
+
         .menu-item {
             display: flex;
             align-items: center;
@@ -502,44 +606,56 @@
             border-bottom: 1px solid #f1f5f9;
             white-space: nowrap;
         }
+
         .menu-item:last-child {
             border-bottom: none;
         }
+
         .menu-item:hover {
             background: #f8fafc;
             color: #0f172a;
         }
+
         .menu-item.editar {
             color: #0ea5e9;
         }
+
         .menu-item.editar:hover {
             background: #eff6ff;
         }
+
         .menu-item.download {
             color: #2563eb;
         }
+
         .menu-item.download:hover {
             background: #eff6ff;
         }
+
         .menu-item.tags {
             color: #475569;
         }
+
         .menu-item.tags:hover {
             background: #f1f5f9;
         }
+
         .menu-item.excluir {
             color: #64748b;
         }
+
         .menu-item.excluir:hover {
             background: #f8fafc;
             color: #dc2626;
         }
+
         .menu-item-icon {
             font-size: 12px;
             width: 16px;
             text-align: center;
             flex-shrink: 0;
         }
+
         .btn::before {
             content: '';
             position: absolute;
@@ -550,90 +666,154 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             transition: left 0.5s;
         }
+
         .btn:hover::before {
             left: 100%;
         }
-        .btn-primary { 
-            background: #2563eb; 
-            color: white; 
+
+        .btn-primary {
+            background: #2563eb;
+            color: white;
             box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
             border: 1px solid #1e40af;
         }
+
         .btn-primary:hover {
             background: #1d4ed8;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
         }
-        .btn-secondary { 
-            background: #475569; 
+
+        .btn-secondary {
+            background: #475569;
             color: white;
             box-shadow: 0 2px 8px rgba(71, 85, 105, 0.25);
             border: 1px solid #334155;
         }
+
         .btn-secondary:hover {
             background: #334155;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(71, 85, 105, 0.35);
         }
-        .btn-warning { 
-            background: #0ea5e9; 
+
+        .btn-warning {
+            background: #0ea5e9;
             color: white;
             box-shadow: 0 2px 8px rgba(14, 165, 233, 0.25);
             border: 1px solid #0284c7;
         }
+
         .btn-warning:hover {
             background: #0284c7;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35);
         }
-        .btn-danger { 
-            background: #64748b; 
+
+        .btn-danger {
+            background: #64748b;
             color: white;
             box-shadow: 0 2px 8px rgba(100, 116, 139, 0.25);
             border: 1px solid #475569;
         }
+
         .btn-danger:hover {
             background: #475569;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(100, 116, 139, 0.35);
         }
+
         .btn-tags {
             background: #475569;
             color: white;
             box-shadow: 0 2px 8px rgba(71, 85, 105, 0.25);
             border: 1px solid #334155;
         }
+
         .btn-tags:hover {
             background: #334155;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(71, 85, 105, 0.35);
         }
+
         .btn:active {
             transform: translateY(0);
             box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
         }
-        .empty-state { text-align: center; padding: 50px 20px; color: #64748b; }
-        .empty-state-icon { font-size: 56px; margin-bottom: 16px; opacity: 0.6; }
-        .empty-state h2 { color: #334155; font-weight: 700; margin-bottom: 6px; font-size: 18px; }
-        html { min-height: 100vh; display: flex; flex-direction: column; }
-        body { flex: 1; display: flex; flex-direction: column; }
-        .page-content { flex: 1; }
-        footer { 
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #64748b;
+        }
+
+        .empty-state-icon {
+            font-size: 56px;
+            margin-bottom: 16px;
+            opacity: 0.6;
+        }
+
+        .empty-state h2 {
+            color: #334155;
+            font-weight: 700;
+            margin-bottom: 6px;
+            font-size: 18px;
+        }
+
+        html {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-content {
+            flex: 1;
+        }
+
+        footer {
             background: #fff;
-            padding: 20px 40px; 
+            padding: 20px 40px;
             border-top: 3px solid rgba(14, 165, 233, 0.3);
-            margin-top: auto; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: relative;
             z-index: 1;
         }
-        footer img { height: 36px; opacity: 0.7; transition: all 0.3s ease; cursor: pointer; }
-        footer img:hover { opacity: 1; transform: scale(1.03); }
-        footer p { font-size: 11px; color: #64748b; margin: 0; }
-        @media (max-width: 768px) { footer { flex-direction: column; gap: 15px; text-align: center; } }
-        
+
+        footer img {
+            height: 36px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        footer img:hover {
+            opacity: 1;
+            transform: scale(1.03);
+        }
+
+        footer p {
+            font-size: 11px;
+            color: #64748b;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            footer {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+
         /* Page Title */
         .page-title {
             color: #0f172a;
@@ -645,6 +825,7 @@
             gap: 14px;
             letter-spacing: -0.5px;
         }
+
         .page-title-icon {
             width: 48px;
             height: 48px;
@@ -657,6 +838,7 @@
             box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3), 0 2px 6px rgba(14, 165, 233, 0.2);
             position: relative;
         }
+
         .page-title-icon::after {
             content: '';
             position: absolute;
@@ -664,37 +846,166 @@
             border-radius: 14px;
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), transparent);
         }
-        
+
         /* Estilos para o painel de filtros */
+        .filters-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 32px rgba(15, 23, 42, 0.05);
+        }
+
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+            align-items: flex-end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-group.col-search {
+            grid-column: span 3;
+        }
+
+        .filter-group.col-type {
+            grid-column: span 2;
+        }
+
+        .filter-group.col-date {
+            grid-column: span 5;
+        }
+
+        .filter-group.col-tags {
+            grid-column: span 2;
+        }
+
+        .filter-group.col-actions {
+            grid-column: span 12;
+            margin-top: 8px;
+        }
+
+        .filter-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .filter-input,
+        .filter-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: #ffffff;
+            border: 2px solid #f1f5f9;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #1e293b;
+            font-family: inherit;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .filter-input:hover,
+        .filter-select:hover {
+            border-color: #e2e8f0;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .active-filters-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f1f5f9;
+        }
+
+        .filter-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background: #eff6ff;
+            border: 1px solid #dbeafe;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1e40af;
+            transition: all 0.2s;
+        }
+
+        .filter-pill:hover {
+            background: #dbeafe;
+            transform: translateY(-1px);
+        }
+
+        .filter-pill-label {
+            color: #60a5fa;
+            font-weight: 500;
+        }
+
+        .filter-pill-remove {
+            width: 18px;
+            height: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #1e40af;
+            border-radius: 50%;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-pill-remove:hover {
+            background: #ef4444;
+            color: #ffffff;
+        }
+
         #filtrosForm input[type="text"],
         #filtrosForm input[type="date"],
         #filtrosForm select {
             transition: all 0.2s ease;
         }
-        
-        #filtrosForm input[type="text"]:focus,
-        #filtrosForm input[type="date"]:focus,
-        #filtrosForm select:focus {
-            outline: none;
-            border-color: #0ea5e9;
-            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
-        }
-        
+
         @media (max-width: 768px) {
             #filtrosForm {
                 grid-template-columns: 1fr !important;
             }
-            #filtrosForm > div[style*="grid-column: span 2"] {
+
+            #filtrosForm>div[style*="grid-column: span 2"] {
                 grid-column: span 1 !important;
             }
-            #filtrosForm > div[style*="grid-column: span 2"] > div[style*="grid-template-columns: 1fr auto 1fr"] {
+
+            #filtrosForm>div[style*="grid-column: span 2"]>div[style*="grid-template-columns: 1fr auto 1fr"] {
                 grid-template-columns: 1fr !important;
             }
-            #filtrosForm > div[style*="grid-column: span 2"] > div[style*="grid-template-columns: 1fr auto 1fr"] > div[style*="color: #94a3b8"] {
+
+            #filtrosForm>div[style*="grid-column: span 2"]>div[style*="grid-template-columns: 1fr auto 1fr"]>div[style*="color: #94a3b8"] {
                 display: none;
             }
         }
-        
+
         /* Estilos de Paginação */
         .btn-paginacao {
             background: white;
@@ -710,6 +1021,7 @@
             justify-content: center;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+
         .btn-paginacao:hover:not(:disabled) {
             background: #f8fafc;
             border-color: #0ea5e9;
@@ -717,9 +1029,11 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(14, 165, 233, 0.15);
         }
+
         .btn-paginacao:active:not(:disabled) {
             transform: translateY(0);
         }
+
         .btn-paginacao-numero {
             background: white;
             border: 2px solid #e2e8f0;
@@ -733,6 +1047,7 @@
             min-width: 40px;
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
+
         .btn-paginacao-numero:hover {
             background: #f8fafc;
             border-color: #0ea5e9;
@@ -740,32 +1055,374 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(14, 165, 233, 0.15);
         }
+
         .btn-paginacao-numero:active {
             transform: translateY(0);
         }
+
         .btn-paginacao-ativa {
             background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%) !important;
             color: white !important;
             border-color: #0ea5e9 !important;
             box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3) !important;
         }
+
         .btn-paginacao-ativa:hover {
             transform: translateY(-2px) !important;
             box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4) !important;
         }
+
         @media (max-width: 768px) {
             .paginacao-container {
                 flex-direction: column;
                 gap: 12px;
             }
-            .btn-paginacao, .btn-paginacao-numero {
+
+            .btn-paginacao,
+            .btn-paginacao-numero {
                 font-size: 12px;
                 padding: 6px 10px;
                 min-width: 36px;
             }
         }
+
+        /* ========== ESTILOS DA TABELA ========== */
+        .comunicados-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 13px;
+        }
+
+        .comunicados-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .comunicados-table th {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            color: white;
+            font-weight: 700;
+            text-align: left;
+            padding: 14px 16px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: none;
+            white-space: nowrap;
+        }
+
+        .comunicados-table th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+
+        .comunicados-table th:last-child {
+            border-radius: 0 12px 0 0;
+            text-align: center;
+        }
+
+        .comunicados-table tbody tr {
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .comunicados-table tbody tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .comunicados-table tbody tr:hover {
+            background: #eff6ff;
+            box-shadow: 0 2px 8px rgba(14, 165, 233, 0.1);
+        }
+
+        .comunicados-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: middle;
+        }
+
+        .comunicados-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comunicados-table tbody tr:last-child td:first-child {
+            border-radius: 0 0 0 12px;
+        }
+
+        .comunicados-table tbody tr:last-child td:last-child {
+            border-radius: 0 0 12px 0;
+        }
+
+        .table-codigo {
+            font-weight: 700;
+            color: #0ea5e9;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .table-titulo {
+            font-weight: 600;
+            color: #1e293b;
+            max-width: 300px;
+        }
+
+        .table-titulo-text {
+            display: block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .table-subtitulo {
+            font-size: 11px;
+            color: #64748b;
+            margin-top: 4px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .table-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            max-width: 200px;
+        }
+
+        .table-tag {
+            background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .table-tag:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(14, 165, 233, 0.3);
+        }
+
+        .table-data {
+            font-size: 12px;
+            color: #64748b;
+            white-space: nowrap;
+        }
+
+        .table-acoes {
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .table-acoes-btns {
+            display: flex;
+            gap: 6px;
+            justify-content: center;
+        }
+
+        .table-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .table-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .table-btn-editar {
+            background: #eff6ff;
+            color: #0ea5e9;
+        }
+
+        .table-btn-editar:hover {
+            background: #0ea5e9;
+            color: white;
+            box-shadow: 0 4px 8px rgba(14, 165, 233, 0.3);
+        }
+
+        .table-btn-download {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+
+        .table-btn-download:hover {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+        }
+
+        .table-btn-tags {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .table-btn-tags:hover {
+            background: #475569;
+            color: white;
+            box-shadow: 0 4px 8px rgba(71, 85, 105, 0.3);
+        }
+
+        .table-btn-excluir {
+            background: #fef2f2;
+            color: #ef4444;
+        }
+
+        .table-btn-excluir:hover {
+            background: #ef4444;
+            color: white;
+            box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+        }
+
+        .table-no-tags {
+            color: #94a3b8;
+            font-size: 11px;
+            font-style: italic;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Tags Edit Mode na Tabela */
+        .table-tags-edit {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px;
+            min-width: 250px;
+        }
+
+        .table-tags-preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 8px;
+            min-height: 24px;
+        }
+
+        .table-tags-input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .table-tags-input:focus {
+            outline: none;
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.1);
+        }
+
+        .table-tags-actions {
+            display: flex;
+            gap: 6px;
+            justify-content: flex-end;
+        }
+
+        .table-tags-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .table-tags-btn-cancel {
+            background: #f1f5f9;
+            color: #475569;
+        }
+
+        .table-tags-btn-cancel:hover {
+            background: #e2e8f0;
+        }
+
+        .table-tags-btn-save {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+        .table-tags-btn-save:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Responsivo para Tabela */
+        @media (max-width: 1024px) {
+            .comunicados-table {
+                font-size: 12px;
+            }
+
+            .comunicados-table th,
+            .comunicados-table td {
+                padding: 10px 12px;
+            }
+
+            .table-titulo {
+                max-width: 200px;
+            }
+
+            .table-tags {
+                max-width: 150px;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            .comunicados-table th,
+            .comunicados-table td {
+                padding: 8px;
+            }
+
+            .table-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+
+            .table-acoes-btns {
+                gap: 4px;
+            }
+
+            /* Esconder colunas menos importantes em mobile */
+            .hide-mobile {
+                display: none;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr !important;
+                gap: 12px;
+            }
+
+            .filter-group.col-search,
+            .filter-group.col-type,
+            .filter-group.col-date,
+            .filter-group.col-tags,
+            .filter-group.col-actions {
+                grid-column: span 1 !important;
+            }
+        }
     </style>
 </head>
+
 <body>
     <div class="page-content">
         <header class="header">
@@ -779,7 +1436,7 @@
                         <span class="tagline">Gestão de Comunicados</span>
                     </div>
                 </div>
-                
+
                 <nav class="header-nav">
                     <a href="/criar-comunicado" class="nav-item">
                         <span class="nav-icon">📝</span>
@@ -793,325 +1450,341 @@
             </div>
         </header>
 
-    <div class="container">
-        <div class="page-title">
-            <div class="page-title-icon">📋</div>
-            <span>Histórico de Comunicados</span>
-        </div>
-        
-        <!-- Painel de Busca e Filtros -->
-        <div class="panel" style="margin-bottom: 20px;">
-            <div style="margin-bottom: 16px;">
-                <h3 style="font-size: 16px; font-weight: 700; color: #0f172a; margin: 0 0 16px 0; display: flex; align-items: center; gap: 8px;">
-                    <span>🔍</span>
-                    <span>Busca e Filtros</span>
-                </h3>
+        <div class="container">
+            <div class="page-title">
+                <div class="page-title-icon">📋</div>
+                <span>Histórico de Comunicados</span>
             </div>
-            
-            <form id="filtrosForm" onsubmit="aplicarFiltros(event)" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; align-items: end; max-width: 100%;">
-                <!-- Busca por Texto -->
-                <div>
-                    <label style="display: block; font-weight: 600; color: #475569; font-size: 12px; margin-bottom: 6px;">🔎 Buscar no conteúdo</label>
-                    <input type="text" id="buscaTexto" name="busca" value="{{ busca_texto }}" 
-                           placeholder="Digite palavras para buscar..." 
-                           style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 13px; transition: all 0.2s;"
-                           onfocus="this.style.borderColor='#0ea5e9'; this.style.boxShadow='0 0 0 3px rgba(14, 165, 233, 0.1)';"
-                           onblur="this.style.borderColor='#e2e8f0'; this.style.boxShadow='none';">
-                </div>
-                
-                <!-- Filtro por Tipo -->
-                <div>
-                    <label style="display: block; font-weight: 600; color: #475569; font-size: 12px; margin-bottom: 6px;">📋 Tipo de Comunicado</label>
-                    <select id="tipoFilter" name="tipo" 
-                            style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 13px; background: white; cursor: pointer;"
-                            onchange="aplicarFiltros()">
-                        <option value="">Todos os tipos</option>
-                        {% for tipo in todos_tipos %}
-                        <option value="{{ tipo }}" {% if tipo_filtro == tipo %}selected{% endif %}>{{ tipo }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                
-                <!-- Filtro por Período de Data -->
-                <div style="grid-column: span 2;">
-                    <label style="display: block; font-weight: 600; color: #475569; font-size: 12px; margin-bottom: 6px;">📅 Período de Criação</label>
-                    <div style="display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center;">
-                        <div>
-                            <label style="display: block; font-weight: 500; color: #64748b; font-size: 11px; margin-bottom: 4px;">De:</label>
-                            <input type="date" id="dataInicio" name="data_inicio" value="{{ data_inicio }}" 
-                                   style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 13px; background: white; cursor: pointer;"
-                                   onchange="aplicarFiltros()">
-                        </div>
-                        <div style="color: #94a3b8; font-size: 18px; font-weight: 300; padding-top: 20px;">→</div>
-                        <div>
-                            <label style="display: block; font-weight: 500; color: #64748b; font-size: 11px; margin-bottom: 4px;">Até:</label>
-                            <input type="date" id="dataFim" name="data_fim" value="{{ data_fim }}" 
-                                   style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 13px; background: white; cursor: pointer;"
-                                   onchange="aplicarFiltros()">
-                        </div>
+
+            <!-- Painel de Busca e Filtros -->
+            <div class="filters-panel">
+                <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <h3
+                        style="font-size: 18px; font-weight: 800; color: #0f172a; margin: 0; display: flex; align-items: center; gap: 10px;">
+                        <span
+                            style="background: #f1f5f9; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 16px;">🔍</span>
+                        <span>Pesquisas</span>
+                    </h3>
+
+                    <div style="display: flex; gap: 8px;">
+                        {% if tag_filtro or busca_texto or tipo_filtro or data_inicio or data_fim %}
+                        <button type="button" onclick="limparFiltros()" class="btn"
+                            style="background: #fef2f2; color: #ef4444; border: 1px solid #fee2e2; padding: 10px 18px; font-size: 12px; font-weight: 700; border-radius: 12px;">
+                            ✕ Limpar Tudo
+                        </button>
+                        {% endif %}
+                        <button type="submit" form="filtrosForm" class="btn"
+                            style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); color: white; border: none; padding: 10px 24px; font-size: 12px; font-weight: 700; border-radius: 12px; box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);">
+                            🔍 Aplicar Filtros
+                        </button>
                     </div>
                 </div>
-                
-                <!-- Filtro por Tag -->
-                <div>
-                    <label style="display: block; font-weight: 600; color: #475569; font-size: 12px; margin-bottom: 6px;">🏷️ Tags</label>
-                    <select id="tagFilter" name="tag" 
-                            style="width: 100%; padding: 10px 14px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 13px; background: white; cursor: pointer;"
-                            onchange="aplicarFiltros()">
-                        <option value="">Todas as tags</option>
-                        {% for tag in todas_tags %}
-                        <option value="{{ tag }}" {% if tag_filtro == tag %}selected{% endif %}>{{ tag }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                
-                <!-- Botões de Ação -->
-                <div style="display: flex; gap: 8px;">
-                    {% if tag_filtro or busca_texto or tipo_filtro or data_inicio or data_fim %}
-                    <button type="button" onclick="limparFiltros()" class="btn" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: white; padding: 10px 20px; flex: 1; white-space: nowrap; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);">
-                        <span>✕</span>
-                        <span>Limpar Filtros</span>
-                    </button>
-                    {% else %}
-                    <button type="submit" class="btn" style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); color: white; padding: 10px 20px; flex: 1; white-space: nowrap;">
-                        <span>🔍</span>
-                        <span>Buscar</span>
-                    </button>
+
+                <form id="filtrosForm" onsubmit="aplicarFiltros(event)" class="filters-grid">
+                    <!-- Busca por Texto -->
+                    <div class="filter-group col-search">
+                        <label class="filter-label">🔎 Busca por conteúdo</label>
+                        <input type="text" id="buscaTexto" name="busca" value="{{ busca_texto }}"
+                            placeholder="Palavras-chave, código..." class="filter-input">
+                    </div>
+
+                    <!-- Filtro por Tipo -->
+                    <div class="filter-group col-type">
+                        <label class="filter-label">📋 Tipo de comunicado</label>
+                        <select id="tipoFilter" name="tipo" class="filter-select" onchange="aplicarFiltros()">
+                            <option value="">Todos os tipos</option>
+                            {% for tipo in todos_tipos %}
+                            <option value="{{ tipo }}" {% if tipo_filtro==tipo %}selected{% endif %}>{{ tipo }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Filtro por Tag -->
+                    <div class="filter-group col-tags">
+                        <label class="filter-label">🏷️ Tags</label>
+                        <select id="tagFilter" name="tag" class="filter-select" onchange="aplicarFiltros()">
+                            <option value="">Todas as tags</option>
+                            {% for tag in todas_tags %}
+                            <option value="{{ tag }}" {% if tag_filtro==tag %}selected{% endif %}>{{ tag }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <!-- Filtro por Período -->
+                    <div class="filter-group col-date">
+                        <label class="filter-label">📅 Período</label>
+                        <div style="display: flex; gap: 8px; align-items: center;">
+                            <input type="date" id="dataInicio" name="data_inicio" value="{{ data_inicio }}"
+                                class="filter-input" style="padding: 10px 8px; font-size: 12px;"
+                                onchange="aplicarFiltros()">
+                            <span style="color: #cbd5e1;">—</span>
+                            <input type="date" id="dataFim" name="data_fim" value="{{ data_fim }}" class="filter-input"
+                                style="padding: 10px 8px; font-size: 12px;" onchange="aplicarFiltros()">
+                        </div>
+                    </div>
+                </form>
+
+                {% if tag_filtro or busca_texto or tipo_filtro or data_inicio or data_fim %}
+                <div class="active-filters-container">
+                    <span
+                        style="font-size: 11px; font-weight: 700; color: #94a3b8; text-transform: uppercase; align-self: center; margin-right: 4px;">Ativos:</span>
+
+                    {% if busca_texto %}
+                    <div class="filter-pill">
+                        <span class="filter-pill-label">Busca:</span> "{{ busca_texto }}"
+                        <span class="filter-pill-remove"
+                            onclick="document.getElementById('buscaTexto').value=''; aplicarFiltros();">×</span>
+                    </div>
+                    {% endif %}
+
+                    {% if tipo_filtro %}
+                    <div class="filter-pill">
+                        <span class="filter-pill-label">Tipo:</span> {{ tipo_filtro }}
+                        <span class="filter-pill-remove"
+                            onclick="document.getElementById('tipoFilter').value=''; aplicarFiltros();">×</span>
+                    </div>
+                    {% endif %}
+
+                    {% if data_inicio or data_fim %}
+                    <div class="filter-pill">
+                        <span class="filter-pill-label">Data:</span>
+                        {% if data_inicio %}{{ data_inicio.split('-')[2] }}/{{ data_inicio.split('-')[1] }}{% else
+                        %}...{% endif %}
+                        a
+                        {% if data_fim %}{{ data_fim.split('-')[2] }}/{{ data_fim.split('-')[1] }}{% else %}...{% endif
+                        %}
+                        <span class="filter-pill-remove"
+                            onclick="document.getElementById('dataInicio').value=''; document.getElementById('dataFim').value=''; aplicarFiltros();">×</span>
+                    </div>
+                    {% endif %}
+
+                    {% if tag_filtro %}
+                    <div class="filter-pill">
+                        <span class="filter-pill-label">Tag:</span> {{ tag_filtro }}
+                        <span class="filter-pill-remove"
+                            onclick="document.getElementById('tagFilter').value=''; aplicarFiltros();">×</span>
+                    </div>
                     {% endif %}
                 </div>
-            </form>
-            
-            {% if tag_filtro or busca_texto or tipo_filtro or data_inicio or data_fim %}
-            <div style="margin-top: 12px; padding: 10px 14px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; font-size: 12px; color: #1e40af;">
-                <strong>Filtros ativos:</strong>
-                {% if busca_texto %}<span style="background: white; padding: 4px 8px; border-radius: 4px; margin-left: 6px;">Busca: "{{ busca_texto }}"</span>{% endif %}
-                {% if tipo_filtro %}<span style="background: white; padding: 4px 8px; border-radius: 4px; margin-left: 6px;">Tipo: {{ tipo_filtro }}</span>{% endif %}
-                {% if data_inicio or data_fim %}
-                    <span style="background: white; padding: 4px 8px; border-radius: 4px; margin-left: 6px;">
-                        Período: 
-                        {% if data_inicio %}
-                            {% set data_inicio_obj = data_inicio.split('-') %}
-                            {{ data_inicio_obj[2] }}/{{ data_inicio_obj[1] }}/{{ data_inicio_obj[0] }}
-                        {% else %}
-                            início
-                        {% endif %}
-                        {% if data_inicio and data_fim %} até {% endif %}
-                        {% if data_fim %}
-                            {% set data_fim_obj = data_fim.split('-') %}
-                            {{ data_fim_obj[2] }}/{{ data_fim_obj[1] }}/{{ data_fim_obj[0] }}
-                        {% else %}
-                            fim
-                        {% endif %}
-                    </span>
                 {% endif %}
-                {% if tag_filtro %}<span style="background: white; padding: 4px 8px; border-radius: 4px; margin-left: 6px;">Tag: {{ tag_filtro }}</span>{% endif %}
             </div>
-            {% endif %}
-        </div>
-        
-        <div class="panel">
-            {% if comunicados %}
-                <div style="margin-bottom: 16px; padding: 12px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+
+            <div class="panel">
+                {% if comunicados %}
+                <div
+                    style="margin-bottom: 16px; padding: 12px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
                     <div style="display: flex; align-items: center; gap: 8px;">
                         <span style="font-size: 14px; font-weight: 600; color: #0369a1;">📊</span>
                         <span style="font-size: 14px; font-weight: 600; color: #0369a1;">
                             {% if total_registros == 1 %}
-                                1 registro encontrado
+                            1 registro encontrado
                             {% else %}
-                                {{ total_registros }} registros encontrados
+                            {{ total_registros }} registros encontrados
                             {% endif %}
                             {% if total_paginas > 1 %}
-                                <span style="color: #64748b; font-weight: 500; margin-left: 8px;">
-                                    (Página {{ pagina_atual }} de {{ total_paginas }})
-                                </span>
+                            <span style="color: #64748b; font-weight: 500; margin-left: 8px;">
+                                (Página {{ pagina_atual }} de {{ total_paginas }})
+                            </span>
                             {% endif %}
                         </span>
                     </div>
                     {% if total_registros > 0 %}
                     <div style="font-size: 12px; color: #64748b;">
-                        Mostrando {{ ((pagina_atual - 1) * registros_por_pagina) + 1 }} a {{ [pagina_atual * registros_por_pagina, total_registros]|min }} de {{ total_registros }}
+                        Mostrando {{ ((pagina_atual - 1) * registros_por_pagina) + 1 }} a {{ [pagina_atual *
+                        registros_por_pagina, total_registros]|min }} de {{ total_registros }}
                     </div>
                     {% endif %}
                 </div>
-                
-                {% for comunicado in comunicados %}
-                <div class="comunicado-item">
-                    <div class="comunicado-header">
-                        <div class="comunicado-header-left">
-                            <div class="comunicado-codigo">
-                                {{ comunicado.codigo_unico }}
-                            </div>
-                            <div class="comunicado-title">{{ comunicado.titulo }}</div>
-                            {% if comunicado.subtitulo %}
-                            <div class="comunicado-subtitle">{{ comunicado.subtitulo }}</div>
-                            {% endif %}
-                            <div class="comunicado-tags-section" style="margin-top: 10px;">
-                                <!-- Modo Visualização -->
-                                <div id="tags-display-{{ comunicado.id }}" style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
-                                    {% if comunicado.tags %}
+
+                <!-- Tabela de Comunicados -->
+                <div class="table-wrapper">
+                    <table class="comunicados-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Título</th>
+                                <th class="hide-mobile">Tags</th>
+                                <th>Data</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for comunicado in comunicados %}
+                            <tr>
+                                <td class="table-codigo">{{ comunicado.codigo_unico }}</td>
+                                <td class="table-titulo">
+                                    <span class="table-titulo-text" title="{{ comunicado.titulo }}">{{ comunicado.titulo
+                                        }}</span>
+                                    {% if comunicado.subtitulo %}
+                                    <span class="table-subtitulo" title="{{ comunicado.subtitulo }}">{{
+                                        comunicado.subtitulo }}</span>
+                                    {% endif %}
+                                </td>
+                                <td class="hide-mobile">
+                                    <!-- Modo Visualização de Tags -->
+                                    <div id="tags-display-{{ comunicado.id }}" class="table-tags">
+                                        {% if comunicado.tags %}
                                         {% for tag in comunicado.tags.split(',') %}
                                         {% set tag_trimmed = tag.strip() %}
                                         {% if tag_trimmed %}
-                                        <span class="tag-badge" onclick="filtrarPorTagEspecifica('{{ tag_trimmed }}')" style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); color: white; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 4px rgba(14, 165, 233, 0.2);">
-                                            🏷️ {{ tag_trimmed }}
-                                        </span>
+                                        <span class="table-tag" onclick="filtrarPorTagEspecifica('{{ tag_trimmed }}')"
+                                            title="Filtrar por {{ tag_trimmed }}">{{ tag_trimmed }}</span>
                                         {% endif %}
                                         {% endfor %}
-                                    {% else %}
-                                        <span style="color: #94a3b8; font-size: 12px; font-style: italic;">Sem tags</span>
-                                    {% endif %}
-                                </div>
-                                
-                                <!-- Modo Edição -->
-                                <div id="tags-edit-{{ comunicado.id }}" style="display: none; margin-top: 8px;">
-                                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 12px;">
-                                        <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; min-height: 32px;" id="tags-preview-{{ comunicado.id }}"></div>
-                                        <div style="display: flex; gap: 8px; align-items: center;">
-                                            <input type="text" id="tags-input-{{ comunicado.id }}" 
-                                                   placeholder="Digite uma tag e pressione Enter ou vírgula" 
-                                                   style="flex: 1; padding: 10px 14px; border: 2px solid #cbd5e1; border-radius: 8px; font-size: 13px; transition: all 0.2s;"
-                                                   onkeydown="handleTagInput(event, {{ comunicado.id }})"
-                                                   onfocus="this.style.borderColor='#0ea5e9'; this.style.boxShadow='0 0 0 3px rgba(14, 165, 233, 0.1)';"
-                                                   onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none';">
-                                        </div>
-                                        <div style="display: flex; gap: 6px; margin-top: 10px; justify-content: flex-end;">
-                                            <button onclick="cancelarEdicaoTags({{ comunicado.id }})" class="btn" style="background: #f1f5f9; color: #475569; padding: 8px 16px; font-size: 12px; border: 1px solid #d1d5db;">✕ Cancelar</button>
-                                            <button onclick="salvarTags({{ comunicado.id }})" class="btn" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; padding: 8px 16px; font-size: 12px; box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);">💾 Salvar Tags</button>
+                                        {% else %}
+                                        <span class="table-no-tags">—</span>
+                                        {% endif %}
+                                    </div>
+                                    <!-- Modo Edição de Tags -->
+                                    <div id="tags-edit-{{ comunicado.id }}" class="table-tags-edit"
+                                        style="display: none;">
+                                        <div class="table-tags-preview" id="tags-preview-{{ comunicado.id }}"></div>
+                                        <input type="text" id="tags-input-{{comunicado.id}}" class="table-tags-input"
+                                            data-id="{{comunicado.id}}" placeholder="Digite uma tag + Enter"
+                                            onkeydown="handleTagInput(event, this)">
+                                        <div class="table-tags-actions">
+                                            <button data-id="{{comunicado.id}}"
+                                                onclick="cancelarEdicaoTags(this.dataset.id)"
+                                                class="table-tags-btn table-tags-btn-cancel">✕</button>
+                                            <button data-id="{{comunicado.id}}" onclick="salvarTags(this.dataset.id)"
+                                                class="table-tags-btn table-tags-btn-save">💾</button>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="comunicado-meta">
-                                <span>📅 Criado em {{ comunicado.criado_em.strftime('%d/%m/%Y às %H:%M') }}</span>
-                                {% if comunicado.atualizado_em and comunicado.atualizado_em != comunicado.criado_em %}
-                                <span>• 🔄 Atualizado em {{ comunicado.atualizado_em.strftime('%d/%m/%Y às %H:%M') }}</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="comunicado-header-right">
-                            <div class="comunicado-buttons">
-                                <div class="menu-hamburguer" onclick="toggleMenu({{ comunicado.id }})">
-                                    <span>☰</span>
-                                </div>
-                                <div class="menu-dropdown" id="menu-{{ comunicado.id }}">
-                                    <div class="menu-item editar" onclick="toggleMenu({{ comunicado.id }}); window.location.href='/criar-comunicado?editar={{ comunicado.id }}'">
-                                        <span class="menu-item-icon">✏️</span>
-                                        <span>Editar</span>
+                                </td>
+                                <td class="table-data">
+                                    {{ comunicado.criado_em.strftime('%d/%m/%Y') }}
+                                    <br>
+                                    <span style="font-size: 10px; color: #94a3b8;">{{
+                                        comunicado.criado_em.strftime('%H:%M') }}</span>
+                                </td>
+                                <td class="table-acoes">
+                                    <div class="table-acoes-btns">
+                                        <button class="table-btn table-btn-editar"
+                                            onclick="window.location.href='/criar-comunicado?editar={{comunicado.id}}'"
+                                            title="Editar">✏️</button>
+                                        <button class="table-btn table-btn-download"
+                                            onclick="window.location.href='/gerar-imagem/{{comunicado.id}}'"
+                                            title="Download">⬇️</button>
+                                        <button class="table-btn table-btn-tags" data-id="{{comunicado.id}}"
+                                            onclick="editarTags(this.dataset.id)" title="Editar Tags">🏷️</button>
+                                        <button class="table-btn table-btn-excluir" data-id="{{comunicado.id}}"
+                                            onclick="deletarComunicado(this.dataset.id)" title="Excluir">🗑️</button>
                                     </div>
-                                    <div class="menu-item download" onclick="toggleMenu({{ comunicado.id }}); window.location.href='/gerar-imagem/{{ comunicado.id }}'">
-                                        <span class="menu-item-icon">⬇️</span>
-                                        <span>Download</span>
-                                    </div>
-                                    <div class="menu-item tags" onclick="editarTags({{ comunicado.id }}); toggleMenu({{ comunicado.id }});">
-                                        <span class="menu-item-icon">🏷️</span>
-                                        <span>Tags</span>
-                                    </div>
-                                    <div class="menu-item excluir" onclick="deletarComunicado({{ comunicado.id }}); toggleMenu({{ comunicado.id }});">
-                                        <span class="menu-item-icon">🗑️</span>
-                                        <span>Excluir</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
-                {% endfor %}
-                
+
                 <!-- Controles de Paginação -->
                 {% if total_paginas > 1 %}
-                <div class="paginacao-container" style="margin-top: 24px; padding-top: 20px; border-top: 2px solid #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <div class="paginacao-container"
+                    style="margin-top: 24px; padding-top: 20px; border-top: 2px solid #e2e8f0; display: flex; justify-content: center; align-items: center; gap: 8px; flex-wrap: wrap;">
                     <!-- Botão Primeira Página -->
                     {% if pagina_atual > 1 %}
-                    <button onclick="irParaPagina(1)" class="btn-paginacao" title="Primeira página" style="padding: 8px 12px; min-width: 40px;">
+                    <button data-page="1" onclick="irParaPagina(this.dataset.page)" class="btn-paginacao"
+                        title="Primeira página" style="padding: 8px 12px; min-width: 40px;">
                         ⏮️
                     </button>
                     {% else %}
-                    <button disabled class="btn-paginacao" style="padding: 8px 12px; min-width: 40px; opacity: 0.4; cursor: not-allowed;">
+                    <button disabled class="btn-paginacao"
+                        style="padding: 8px 12px; min-width: 40px; opacity: 0.4; cursor: not-allowed;">
                         ⏮️
                     </button>
                     {% endif %}
-                    
+
                     <!-- Botão Página Anterior -->
                     {% if pagina_atual > 1 %}
-                    <button onclick="irParaPagina({{ pagina_atual - 1 }})" class="btn-paginacao" title="Página anterior" style="padding: 8px 12px; min-width: 40px;">
+                    <button data-page="{{pagina_atual - 1}}" onclick="irParaPagina(this.dataset.page)"
+                        class="btn-paginacao" title="Página anterior" style="padding: 8px 12px; min-width: 40px;">
                         ◀️
                     </button>
                     {% else %}
-                    <button disabled class="btn-paginacao" style="padding: 8px 12px; min-width: 40px; opacity: 0.4; cursor: not-allowed;">
+                    <button disabled class="btn-paginacao"
+                        style="padding: 8px 12px; min-width: 40px; opacity: 0.4; cursor: not-allowed;">
                         ◀️
                     </button>
                     {% endif %}
-                    
+
                     <!-- Números de Página -->
                     <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
                         {% set inicio_paginas = [1, pagina_atual - 2]|max %}
                         {% set fim_paginas = [total_paginas, pagina_atual + 2]|min %}
-                        
+
                         {% if inicio_paginas > 1 %}
-                        <button onclick="irParaPagina(1)" class="btn-paginacao-numero">1</button>
+                        <button data-page="1" onclick="irParaPagina(this.dataset.page)"
+                            class="btn-paginacao-numero">1</button>
                         {% if inicio_paginas > 2 %}
                         <span style="color: #94a3b8; padding: 0 4px;">...</span>
                         {% endif %}
                         {% endif %}
-                        
+
                         {% for num in range(inicio_paginas, fim_paginas + 1) %}
                         {% if num == pagina_atual %}
-                        <button class="btn-paginacao-numero btn-paginacao-ativa" style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); color: white; font-weight: 700; box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);">
-                            {{ num }}
+                        <button class="btn-paginacao-numero btn-paginacao-ativa"
+                            style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); color: white; font-weight: 700; box-shadow: 0 2px 8px rgba(14, 165, 233, 0.3);">
+                            {{num}}
                         </button>
                         {% else %}
-                        <button onclick="irParaPagina({{ num }})" class="btn-paginacao-numero">{{ num }}</button>
+                        <button data-page="{{num}}" onclick="irParaPagina(this.dataset.page)"
+                            class="btn-paginacao-numero">{{num}}</button>
                         {% endif %}
                         {% endfor %}
-                        
-                        {% if fim_paginas < total_paginas %}
-                        {% if fim_paginas < total_paginas - 1 %}
-                        <span style="color: #94a3b8; padding: 0 4px;">...</span>
-                        {% endif %}
-                        <button onclick="irParaPagina({{ total_paginas }})" class="btn-paginacao-numero">{{ total_paginas }}</button>
-                        {% endif %}
+
+                        {% if fim_paginas < total_paginas %} {% if fim_paginas < total_paginas - 1 %} <span
+                            style="color: #94a3b8; padding: 0 4px;">...</span>
+                            {% endif %}
+                            <button data-page="{{total_paginas}}" onclick="irParaPagina(this.dataset.page)"
+                                class="btn-paginacao-numero">{{total_paginas}}</button>
+                            {% endif %}
                     </div>
-                    
+
                     <!-- Botão Próxima Página -->
-                    {% if pagina_atual < total_paginas %}
-                    <button onclick="irParaPagina({{ pagina_atual + 1 }})" class="btn-paginacao" title="Próxima página" style="padding: 8px 12px; min-width: 40px;">
+                    {% if pagina_atual < total_paginas %} <button data-page="{{pagina_atual + 1}}"
+                        onclick="irParaPagina(this.dataset.page)" class="btn-paginacao" title="Próxima página"
+                        style="padding: 8px 12px; min-width: 40px;">
                         ▶️
-                    </button>
-                    {% else %}
-                    <button disabled class="btn-paginacao" style="padding: 8px 12px; min-width: 40px; opacity: 0.4; cursor: not-allowed;">
-                        ▶️
-                    </button>
-                    {% endif %}
-                    
-                    <!-- Botão Última Página -->
-                    {% if pagina_atual < total_paginas %}
-                    <button onclick="irParaPagina({{ total_paginas }})" class="btn-paginacao" title="Última página" style="padding: 8px 12px; min-width: 40px;">
-                        ⏭️
-                    </button>
-                    {% else %}
-                    <button disabled class="btn-paginacao" style="padding: 8px 12px; min-width: 40px; opacity: 0.4; cursor: not-allowed;">
-                        ⏭️
-                    </button>
-                    {% endif %}
+                        </button>
+                        {% else %}
+                        <button disabled class="btn-paginacao"
+                            style="padding: 8px 12px; min-width: 40px; opacity: 0.4; cursor: not-allowed;">
+                            ▶️
+                        </button>
+                        {% endif %}
+
+                        <!-- Botão Última Página -->
+                        {% if pagina_atual < total_paginas %} <button data-page="{{total_paginas}}"
+                            onclick="irParaPagina(this.dataset.page)" class="btn-paginacao" title="Última página"
+                            style="padding: 8px 12px; min-width: 40px;">
+                            ⏭️
+                            </button>
+                            {% else %}
+                            <button disabled class="btn-paginacao"
+                                style="padding: 8px 12px; min-width: 40px; opacity: 0.4; cursor: not-allowed;">
+                                ⏭️
+                            </button>
+                            {% endif %}
                 </div>
                 {% endif %}
-            {% else %}
+                {% else %}
                 <div class="empty-state">
                     <div class="empty-state-icon">📭</div>
                     {% if tag_filtro or busca_texto or tipo_filtro or data_inicio or data_fim %}
-                        <h2>Nenhum comunicado encontrado</h2>
-                        <p>Não há comunicados que correspondam aos filtros aplicados.</p>
-                        <button onclick="limparFiltros()" class="btn" style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); color: white; padding: 10px 20px; margin-top: 16px;">
-                            🔄 Limpar Filtros
-                        </button>
+                    <h2>Nenhum comunicado encontrado</h2>
+                    <p>Não há comunicados que correspondam aos filtros aplicados.</p>
+                    <button onclick="limparFiltros()" class="btn"
+                        style="background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); color: white; padding: 10px 20px; margin-top: 16px;">
+                        🔄 Limpar Filtros
+                    </button>
                     {% else %}
-                        <h2>Nenhum comunicado criado ainda</h2>
-                        <p>Crie seu primeiro comunicado para começar</p>
+                    <h2>Nenhum comunicado criado ainda</h2>
+                    <p>Crie seu primeiro comunicado para começar</p>
                     {% endif %}
                 </div>
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
-    </div>
     </div>
 
     <footer>
@@ -1123,82 +1796,82 @@
         function validarPeriodo() {
             const dataInicio = document.getElementById('dataInicio').value;
             const dataFim = document.getElementById('dataFim').value;
-            
+
             if (dataInicio && dataFim && dataInicio > dataFim) {
                 alert('⚠️ A data de início não pode ser maior que a data de fim!');
                 document.getElementById('dataFim').value = '';
                 return false;
             }
-            
+
             aplicarFiltros();
             return true;
         }
-        
+
         function aplicarFiltros(event) {
             if (event) {
                 event.preventDefault();
             }
-            
+
             const form = document.getElementById('filtrosForm');
             const formData = new FormData(form);
             const params = new URLSearchParams();
-            
+
             // Adicionar apenas parâmetros com valor
             for (const [key, value] of formData.entries()) {
                 if (value && value.trim() !== '') {
                     params.append(key, value.trim());
                 }
             }
-            
+
             // Resetar para página 1 ao aplicar novos filtros
             params.delete('page');
-            
+
             const queryString = params.toString();
             window.location.href = queryString ? `/historico?${queryString}` : '/historico';
         }
-        
+
         function filtrarPorTagEspecifica(tag) {
             const form = document.getElementById('filtrosForm');
             const formData = new FormData(form);
             const params = new URLSearchParams();
-            
+
             // Manter outros filtros
             for (const [key, value] of formData.entries()) {
                 if (key !== 'tag' && value && value.trim() !== '') {
                     params.append(key, value.trim());
                 }
             }
-            
+
             // Adicionar tag selecionada
             params.append('tag', tag);
-            
+
             // Resetar para página 1 ao filtrar por tag
             params.delete('page');
-            
+
             window.location.href = `/historico?${params.toString()}`;
         }
-        
+
         function limparFiltros() {
             window.location.href = '/historico';
         }
-        
+
         function irParaPagina(pagina) {
             const params = new URLSearchParams(window.location.search);
-            
+
             // Atualizar ou adicionar parâmetro de página
             params.set('page', pagina);
-            
+
             window.location.href = `/historico?${params.toString()}`;
         }
-        
+
         // Armazenar tags de cada comunicado
         const tagsData = {};
-        
+
         function editarTags(id) {
             // Obter tags atuais do elemento de display
             const displayElement = document.getElementById(`tags-display-${id}`);
             let tagsArray = [];
-            
+
             // Se há tags, extrair do texto ou dos elementos
             const tagElements = displayElement.querySelectorAll('.tag-badge');
             if (tagElements.length > 0) {
@@ -1215,61 +1888,62 @@
                     tagsArray = text.split(',').map(t => t.trim()).filter(t => t);
                 }
             }
-            
+
             // Salvar tags no array
             tagsData[id] = [...tagsArray];
-            
+
             // Esconder visualização e mostrar edição
             displayElement.style.display = 'none';
             document.getElementById(`tags-edit-${id}`).style.display = 'block';
-            
+
             // Atualizar preview
             atualizarTagsPreview(id);
-            
+
             // Focar no input
             setTimeout(() => {
                 document.getElementById(`tags-input-${id}`).focus();
             }, 100);
         }
-        
+
         function atualizarTagsPreview(id) {
             const container = document.getElementById(`tags-preview-${id}`);
             container.innerHTML = '';
-            
+
             if (!tagsData[id] || tagsData[id].length === 0) {
                 container.innerHTML = '<span style="color: #94a3b8; font-size: 12px; font-style: italic;">Nenhuma tag adicionada</span>';
                 return;
             }
-            
+
             tagsData[id].forEach((tag, index) => {
                 const tagElement = document.createElement('span');
                 tagElement.style.cssText = 'background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%); color: white; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 4px rgba(14, 165, 233, 0.2);';
                 tagElement.innerHTML = `🏷️ ${tag} <span style="font-size: 14px; opacity: 0.9; font-weight: bold; margin-left: 4px;" onclick="removerTagPreview(${id}, ${index}); event.stopPropagation();">×</span>`;
-                tagElement.onmouseover = function() { this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 4px 8px rgba(14, 165, 233, 0.3)'; };
-                tagElement.onmouseout = function() { this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px rgba(14, 165, 233, 0.2)'; };
+                tagElement.onmouseover = function () { this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 4px 8px rgba(14, 165, 233, 0.3)'; };
+                tagElement.onmouseout = function () { this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px rgba(14, 165, 233, 0.2)'; };
                 container.appendChild(tagElement);
             });
         }
-        
+
         function removerTagPreview(id, index) {
             if (tagsData[id] && tagsData[id][index]) {
                 tagsData[id].splice(index, 1);
                 atualizarTagsPreview(id);
             }
         }
-        
-        function handleTagInput(event, id) {
+
+        function handleTagInput(event, el) {
+            const id = el.dataset.id;
             if (event.key === 'Enter' || event.key === ',') {
                 event.preventDefault();
                 const input = document.getElementById(`tags-input-${id}`);
                 const value = input.value.trim();
-                
+
                 if (value) {
                     // Inicializar array se não existir
                     if (!tagsData[id]) {
                         tagsData[id] = [];
                     }
-                    
+
                     // Se contém vírgula, dividir
                     if (value.includes(',')) {
                         value.split(',').forEach(tag => {
@@ -1284,7 +1958,7 @@
                             tagsData[id].push(value);
                         }
                     }
-                    
+
                     input.value = '';
                     atualizarTagsPreview(id);
                 }
@@ -1294,33 +1968,33 @@
                 atualizarTagsPreview(id);
             }
         }
-        
+
         function cancelarEdicaoTags(id) {
             // Restaurar tags originais
             delete tagsData[id];
-            
+
             // Esconder edição e mostrar visualização
             document.getElementById(`tags-display-${id}`).style.display = 'flex';
             document.getElementById(`tags-edit-${id}`).style.display = 'none';
-            
+
             // Limpar input
             document.getElementById(`tags-input-${id}`).value = '';
         }
-        
+
         async function salvarTags(id) {
             if (!tagsData[id]) {
                 tagsData[id] = [];
             }
-            
+
             const tagsString = tagsData[id].join(', ');
-            
+
             try {
                 const response = await fetch(`/comunicado/${id}/tags`, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ tags: tagsString })
                 });
-                
+
                 const data = await response.json();
                 if (data.success) {
                     // Recarregar a página para mostrar as tags atualizadas
@@ -1335,12 +2009,12 @@
 
         async function deletarComunicado(id) {
             if (!confirm('Tem certeza que deseja deletar este comunicado? Esta ação não pode ser desfeita.')) return;
-            
+
             try {
                 const response = await fetch(`/comunicado/${id}`, {
                     method: 'DELETE'
                 });
-                
+
                 const data = await response.json();
                 if (data.success) {
                     location.reload();
@@ -1353,12 +2027,12 @@
         function toggleMenu(id) {
             const menu = document.getElementById(`menu-${id}`);
             const isOpen = menu.classList.contains('show');
-            
+
             // Fechar todos os menus abertos
             document.querySelectorAll('.menu-dropdown.show').forEach(m => {
                 m.classList.remove('show');
             });
-            
+
             // Abrir o menu clicado se não estava aberto
             if (!isOpen) {
                 menu.classList.add('show');
@@ -1366,7 +2040,7 @@
         }
 
         // Fechar menu ao clicar fora
-        document.addEventListener('click', function(event) {
+        document.addEventListener('click', function (event) {
             if (!event.target.closest('.comunicado-buttons')) {
                 document.querySelectorAll('.menu-dropdown.show').forEach(menu => {
                     menu.classList.remove('show');
@@ -1375,4 +2049,5 @@
         });
     </script>
 </body>
+
 </html>
