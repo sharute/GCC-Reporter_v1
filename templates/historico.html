@@ -1154,11 +1154,34 @@
             border-radius: 0 0 12px 0;
         }
 
-        .table-codigo {
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
             font-weight: 700;
-            color: #0ea5e9;
-            font-size: 12px;
-            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 4px;
+        }
+
+        .status-rascunho {
+            background: #eff6ff;
+            color: #3b82f6;
+            border: 1px solid #dbeafe;
+        }
+
+        .status-enviado {
+            background: #f0fdf4;
+            color: #16a34a;
+            border: 1px solid #dcfce7;
+        }
+
+        .table-codigo-small {
+            display: block;
+            font-size: 10px;
+            color: #94a3b8;
+            font-weight: 500;
         }
 
         .table-titulo {
@@ -1601,7 +1624,7 @@
                     <table class="comunicados-table">
                         <thead>
                             <tr>
-                                <th>Código</th>
+                                <th>Status</th>
                                 <th>Título</th>
                                 <th class="hide-mobile">Tags</th>
                                 <th>Data</th>
@@ -1611,7 +1634,12 @@
                         <tbody>
                             {% for comunicado in comunicados %}
                             <tr>
-                                <td class="table-codigo">{{ comunicado.codigo_unico }}</td>
+                                <td style="text-align: center; white-space: nowrap;">
+                                    <span class="status-badge status-{{comunicado.status}}">
+                                        {{ 'Rascunho' if comunicado.status == 'rascunho' else 'Enviado' }}
+                                    </span>
+                                    <span class="table-codigo-small">{{comunicado.codigo_unico}}</span>
+                                </td>
                                 <td class="table-titulo">
                                     <span class="table-titulo-text" title="{{ comunicado.titulo }}">{{ comunicado.titulo
                                         }}</span>

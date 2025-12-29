@@ -424,7 +424,13 @@ def historico():
     
     # Filtro por tipo de comunicado (título)
     if tipo_filtro:
-        query = query.filter(Comunicado.titulo == tipo_filtro)
+        if tipo_filtro == 'Personalizado':
+            # Lista explícita para exclusão (evitando problemas de upper() com acentos no SQLite)
+            tipos_excluir = ['Degradação', 'Indisponibilidade', 'Instabilidade', 'Normalização',
+                             'DEGRADAÇÃO', 'INDISPONIBILIDADE', 'INSTABILIDADE', 'NORMALIZAÇÃO']
+            query = query.filter(~Comunicado.titulo.in_(tipos_excluir))
+        else:
+            query = query.filter(Comunicado.titulo == tipo_filtro)
         filtros_aplicados.append(f'tipo={tipo_filtro}')
     
     # Busca por texto (título, subtítulo, corpo) - case insensitive e suporta múltiplas palavras
@@ -491,16 +497,32 @@ def historico():
             tags_list = [tag.strip() for tag in com.tags.split(',')]
             todas_tags.update(tags_list)
     
-    # Coletar todos os tipos únicos de comunicado
-    todos_tipos = set()
-    for com in Comunicado.query.all():
-        if com.titulo:
-            todos_tipos.add(com.titulo)
+    # Coletar tipos para o dropdown
+    # Lista para comparação (usando minusculo para ser mais seguro)
+    TIPOS_PADRAO_LOWER = ['degradação', 'indisponibilidade', 'instabilidade', 'normalização']
+    
+    # Coletar todos os títulos reais no banco (distinct para performance)
+    tipos_no_banco = [t[0] for t in Comunicado.query.with_entities(Comunicado.titulo).distinct().all()]
+    
+    standard_found = []
+    has_custom = False
+    
+    for t in tipos_no_banco:
+        if t:
+            if t.lower() in TIPOS_PADRAO_LOWER:
+                if t not in standard_found:
+                    standard_found.append(t)
+            else:
+                has_custom = True
+    
+    todos_tipos_dropdown = sorted(standard_found)
+    if has_custom:
+        todos_tipos_dropdown.append('Personalizado')
     
     return render_template('historico.html', 
                          comunicados=comunicados, 
                          todas_tags=sorted(todas_tags),
-                         todos_tipos=sorted(todos_tipos),
+                         todos_tipos=todos_tipos_dropdown,
                          tag_filtro=tag_filtro,
                          busca_texto=busca_texto,
                          tipo_filtro=tipo_filtro,
