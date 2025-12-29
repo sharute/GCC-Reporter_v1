@@ -37,7 +37,7 @@ if [ ! -f .env ]; then
         echo "   ⚠️  env.example não encontrado. Criando .env padrão..."
         cat > .env << 'EOF'
 SECRET_KEY=
-DATABASE_URI=sqlite:///comunicados.db
+DATABASE_URI=sqlite:///database/comunicados.db
 UPLOAD_FOLDER=static/uploads
 FLASK_DEBUG=false
 FLASK_HOST=0.0.0.0

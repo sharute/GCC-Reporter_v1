@@ -20,9 +20,14 @@ except ImportError:
 
 app = Flask(__name__)
 
+# Diretório base do projeto
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Configurações via variáveis de ambiente (com valores padrão seguros)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', secrets.token_urlsafe(32))
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI', 'sqlite:///comunicados.db')
+# Para SQLite, usar caminho absoluto para evitar problemas com diretório de trabalho
+default_db_path = os.path.join(BASE_DIR, 'database', 'comunicados.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI', f'sqlite:///{default_db_path}')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER', 'static/uploads')
 app.config['DEBUG'] = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
@@ -300,7 +305,7 @@ def criar_comunicado():
 def gerar_imagem(comunicado_id):
     # Usar renderização HTML para garantir 100% de fidelidade com a prévia
     try:
-        from gerar_imagem_html import gerar_png_html
+        from scripts.gerar_imagem_html import gerar_png_html
         comunicado = Comunicado.query.get_or_404(comunicado_id)
         configs = {c.chave: c.valor for c in Configuracao.query.all()}
         # Gerar imagem a partir do HTML (método novo - 100% fiel à prévia)
@@ -308,7 +313,7 @@ def gerar_imagem(comunicado_id):
     except Exception as e:
         # Fallback para método antigo se houver erro
         print(f"Erro ao usar renderização HTML, usando método PIL: {e}")
-        from gerar_imagem import gerar_png
+        from scripts.gerar_imagem import gerar_png
         comunicado = Comunicado.query.get_or_404(comunicado_id)
         configs = {c.chave: c.valor for c in Configuracao.query.all()}
         # Gerar imagem
@@ -346,6 +351,10 @@ def preview():
     rodape_sanitized = sanitize_html(data.get('rodape', ''))
     
     template_id = data.get('template_id')
+    try:
+        template_id = int(template_id) if template_id else None
+    except (ValueError, TypeError):
+        template_id = None
     template = db.session.get(Template, template_id) if template_id else None
     
     html = render_template('preview_comunicado.html', 

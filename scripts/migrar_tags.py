@@ -5,7 +5,7 @@ Script de migração para adicionar coluna tags ao banco de dados
 import sqlite3
 import os
 
-db_path = 'comunicados.db'
+db_path = 'database/comunicados.db'
 
 if not os.path.exists(db_path):
     print(f"❌ Banco de dados {db_path} não encontrado!")

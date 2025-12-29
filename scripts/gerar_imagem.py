@@ -32,9 +32,12 @@ QUALIDADE_IMAGEM = 95
 COR_PRETO = '#000000'
 COR_BRANCO = '#FFFFFF'
 
-# Caminhos das fontes
-FONTE_GLOBO_REGULAR = 'static/fonts/GlobotipoCorporativa-Regular.ttf'
-FONTE_GLOBO_BOLD = 'static/fonts/GlobotipoCorporativa-Bold.ttf'
+# Diretório base do projeto (um nível acima do diretório scripts/)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Caminhos das fontes (relativos ao diretório base do projeto)
+FONTE_GLOBO_REGULAR = os.path.join(BASE_DIR, 'static/fonts/GlobotipoCorporativa-Regular.ttf')
+FONTE_GLOBO_BOLD = os.path.join(BASE_DIR, 'static/fonts/GlobotipoCorporativa-Bold.ttf')
 
 # Títulos especiais que devem ser quebrados em duas linhas
 TITULOS_ESPECIAIS = {
@@ -232,7 +235,7 @@ def _criar_imagem_base(comunicado):
     """
     if comunicado.template and comunicado.template.imagem_fundo:
         try:
-            img_path = os.path.join('static', comunicado.template.imagem_fundo)
+            img_path = os.path.join(BASE_DIR, 'static', comunicado.template.imagem_fundo)
             img = Image.open(img_path)
             if img.mode != 'RGB':
                 img = img.convert('RGB')

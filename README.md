@@ -22,7 +22,7 @@ Sistema web para criação padronizada de comunicados com geração automática 
 pip3 install -r requirements.txt
 
 # Iniciar
-./iniciar.sh
+./scripts/iniciar.sh
 
 # Acessar
 # http://localhost:5000
@@ -54,10 +54,13 @@ Variáveis principais:
 
 ```
 ├── app.py              # Aplicação Flask
-├── gerar_imagem.py     # Gerador de PNG
 ├── requirements.txt    # Dependências
-├── iniciar.sh          # Script de início
-├── docs/               # Documentação adicional
+├── database/           # Banco de dados SQLite
+├── scripts/            # Scripts auxiliares
+│   ├── iniciar.sh      # Script de início
+│   ├── setup_rapido.sh # Setup automatizado
+│   └── gerar_imagem.py # Gerador de PNG
+├── docs/               # Documentação
 ├── templates/          # Templates HTML
 └── static/             # CSS, JS, uploads
 ```

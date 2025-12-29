@@ -36,7 +36,7 @@ SECRET_KEY=SUA_CHAVE_SECRETA_AQUI
 DATABASE_URI=postgresql://user:password@localhost/comunicados
 
 # Ou mantenha SQLite para pequenos volumes
-DATABASE_URI=sqlite:///comunicados.db
+DATABASE_URI=sqlite:///database/comunicados.db
 
 # Configurações de produção
 FLASK_DEBUG=false
@@ -179,7 +179,7 @@ sudo systemctl status gccreporter
 
 ```bash
 chmod 600 /home/gccreporter/.env
-chmod 600 /home/gccreporter/comunicados.db
+chmod 600 /home/gccreporter/database/comunicados.db
 chmod -R 755 /home/gccreporter/static
 ```
 
@@ -197,7 +197,7 @@ sudo ufw enable
 Crie um script de backup:
 
 ```bash
-nano /home/gccreporter/backup.sh
+nano /home/gccreporter/scripts/backup.sh
 ```
 
 ```bash
@@ -207,7 +207,7 @@ DATE=$(date +%Y%m%d_%H%M%S)
 mkdir -p $BACKUP_DIR
 
 # Backup do banco de dados
-cp /home/gccreporter/comunicados.db $BACKUP_DIR/comunicados_$DATE.db
+cp /home/gccreporter/database/comunicados.db $BACKUP_DIR/comunicados_$DATE.db
 
 # Backup dos uploads
 tar -czf $BACKUP_DIR/uploads_$DATE.tar.gz /home/gccreporter/static/uploads
@@ -222,7 +222,7 @@ Adicione ao crontab:
 ```bash
 crontab -e
 # Backup diário às 2h da manhã
-0 2 * * * /home/gccreporter/backup.sh
+0 2 * * * /home/gccreporter/scripts/backup.sh
 ```
 
 ## 📊 Monitoramento
