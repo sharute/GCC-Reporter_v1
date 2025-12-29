@@ -12,10 +12,10 @@ function showSavingIndicator(message, type = 'saving') {
     const indicator = document.getElementById('savingIndicator');
     const text = document.getElementById('savingText');
     const spinner = indicator.querySelector('.spinner');
-    
+
     indicator.className = 'saving-indicator show';
     text.textContent = message;
-    
+
     if (type === 'success') {
         indicator.classList.add('success');
         spinner.style.display = 'none';
@@ -25,7 +25,7 @@ function showSavingIndicator(message, type = 'saving') {
     } else {
         spinner.style.display = 'block';
     }
-    
+
     if (type !== 'saving') {
         setTimeout(() => {
             indicator.classList.remove('show');
@@ -37,7 +37,7 @@ function startAutoSave() {
     clearTimeout(autoSaveTimeout);
     autoSaveTimeout = setTimeout(async () => {
         const currentData = JSON.stringify(coletarDadosFormulario());
-        
+
         // Só salva se houver mudanças e se há um ID de comunicado (modo edição ou após primeiro save)
         if (currentData !== lastSavedData && document.getElementById('comunicado_id').value) {
             try {
@@ -55,7 +55,7 @@ function startAutoSave() {
 async function salvarRascunhoSilencioso() {
     const dados = coletarDadosFormulario();
     dados.status = 'rascunho';
-    
+
     const comunicadoId = document.getElementById('comunicado_id').value;
     if (comunicadoId) {
         const response = await fetch(`/comunicado/${comunicadoId}`, {
@@ -63,7 +63,7 @@ async function salvarRascunhoSilencioso() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(dados)
         });
-        
+
         if (!response.ok) throw new Error('Erro ao salvar');
         return await response.json();
     }
@@ -77,7 +77,7 @@ function toggleTipoCustom() {
     const tipoSelect = document.getElementById('tipo');
     const tipoCustom = document.getElementById('tipoCustom');
     const templateInput = document.getElementById('template');
-    
+
     if (checkbox.checked) {
         customGroup.style.display = 'block';
         posicionamentoCard.style.display = 'block';
@@ -120,7 +120,7 @@ function resetTituloPersonalizado(event) {
         event.preventDefault();
         event.stopPropagation();
     }
-    
+
     document.getElementById('tipoCustom_pos_x').value = '30';
     document.getElementById('tipoCustom_pos_y').value = '150';
     document.getElementById('tipoCustom_tamanho').value = '56';
@@ -152,26 +152,26 @@ function atualizarCharCounter(inputId, counterId, maxLength) {
 function atualizarEstatisticasCorpo() {
     const corpoEl = document.getElementById('corpo');
     if (!corpoEl) return;
-    
+
     // Obter texto sem HTML
     const texto = corpoEl.innerText || corpoEl.textContent || '';
     const textoLimpo = texto.trim();
-    
+
     // Contar caracteres (sem espaços)
     const caracteres = textoLimpo.replace(/\s/g, '').length;
     const caracteresComEspacos = textoLimpo.length;
-    
+
     // Contar palavras
     const palavras = textoLimpo ? textoLimpo.split(/\s+/).filter(p => p.length > 0).length : 0;
-    
+
     // Calcular tempo de leitura (média de 200 palavras por minuto)
     const tempoLeitura = palavras > 0 ? Math.ceil(palavras / 200) : 0;
-    
+
     // Atualizar contadores
     const charCounter = document.getElementById('corpoCharCounter');
     const wordCounter = document.getElementById('corpoWordCounter');
     const readTime = document.getElementById('corpoReadTime');
-    
+
     if (charCounter) {
         charCounter.textContent = `${caracteresComEspacos.toLocaleString('pt-BR')} caracteres`;
     }
@@ -204,7 +204,7 @@ function atualizarPreview() {
     previewTimeout = setTimeout(async () => {
         const tipoPersonalizadoCheckbox = document.getElementById('tipoPersonalizado');
         const usarTituloPersonalizado = tipoPersonalizadoCheckbox && tipoPersonalizadoCheckbox.checked;
-        
+
         const dados = {
             template_id: document.getElementById('template').value,
             titulo: getTituloValue(),
@@ -238,15 +238,15 @@ function atualizarPreview() {
             const data = await response.json();
             document.getElementById('previewContent').innerHTML = data.html;
             document.getElementById('previewError').style.display = 'none';
-            
+
             // Ajustar quebra de linha do rodapé e subtítulo na prévia
             ajustarRodapePreview();
             ajustarSubtituloPreview();
-            
+
             // Atualizar informações dos headers
             atualizarInfoPreview();
             atualizarInfoFormulario();
-            
+
             // Aplicar zoom atual e centralizar após atualizar preview
             setTimeout(() => {
                 document.getElementById('previewWrapper').style.transform = `scale(${currentZoom})`;
@@ -256,7 +256,7 @@ function atualizarPreview() {
             console.error('Erro ao atualizar prévia:', error);
             document.getElementById('previewError').textContent = 'Erro ao gerar prévia. Tente novamente.';
             document.getElementById('previewError').style.display = 'block';
-            
+
             // Atualizar status para erro
             const statusStat = document.getElementById('previewStatusStat');
             if (statusStat) {
@@ -302,14 +302,14 @@ function toggleSubtituloCase() {
     const subtituloInput = document.getElementById('subtitulo');
     const caseBtn = document.getElementById('subtituloCaseBtn');
     if (!subtituloInput || !caseBtn) return;
-    
+
     const textoAtual = subtituloInput.value;
     if (!textoAtual.trim()) return;
-    
+
     const estadoAtual = caseBtn.getAttribute('data-state') || 'normal';
     let novoEstado;
     let novoTexto;
-    
+
     // Ciclar entre os três estados: uppercase -> lowercase -> capitalize -> uppercase...
     if (estadoAtual === 'normal') {
         novoEstado = 'uppercase';
@@ -324,7 +324,7 @@ function toggleSubtituloCase() {
         novoEstado = 'uppercase';
         novoTexto = textoAtual.toUpperCase();
     }
-    
+
     subtituloInput.value = novoTexto;
     caseBtn.setAttribute('data-state', novoEstado);
     atualizarPreview();
@@ -335,13 +335,13 @@ function setAlign(align) {
     const corpo = document.getElementById('corpo');
     corpo.style.textAlign = align;
     document.getElementById('corpo_alinhamento').value = align;
-    
+
     // Atualizar botões ativos
     document.querySelectorAll('.align-btn').forEach(btn => {
         btn.classList.remove('active');
     });
     document.querySelector(`.align-btn[data-align="${align}"]`).classList.add('active');
-    
+
     atualizarPreview();
     atualizarInfoFormulario();
     startAutoSave();
@@ -363,17 +363,17 @@ function limparFormulario() {
 function ajustarRodapePreview() {
     const rodapeEl = document.querySelector('#rodape-preview');
     if (!rodapeEl) return;
-    
+
     rodapeEl.style.width = '980px';
     rodapeEl.style.maxWidth = '980px';
     rodapeEl.style.boxSizing = 'border-box';
     rodapeEl.style.wordWrap = 'break-word';
     rodapeEl.style.wordBreak = 'break-word';
     rodapeEl.style.overflowWrap = 'break-word';
-    
+
     const texto = rodapeEl.textContent || rodapeEl.innerText;
     if (!texto.trim()) return;
-    
+
     const temp = document.createElement('span');
     temp.style.position = 'absolute';
     temp.style.visibility = 'hidden';
@@ -383,12 +383,12 @@ function ajustarRodapePreview() {
     temp.style.fontWeight = 'normal';
     temp.textContent = texto;
     document.body.appendChild(temp);
-    
+
     const larguraTexto = temp.offsetWidth;
     const larguraDisponivel = 980;
-    
+
     document.body.removeChild(temp);
-    
+
     if (larguraTexto <= larguraDisponivel) {
         rodapeEl.style.whiteSpace = 'nowrap';
     } else {
@@ -400,17 +400,17 @@ function ajustarRodapePreview() {
 function ajustarSubtituloPreview() {
     const subtituloEl = document.querySelector('#subtitulo-preview');
     if (!subtituloEl) return;
-    
+
     subtituloEl.style.width = '880px';
     subtituloEl.style.maxWidth = '880px';
     subtituloEl.style.boxSizing = 'border-box';
     subtituloEl.style.wordWrap = 'break-word';
     subtituloEl.style.wordBreak = 'break-word';
     subtituloEl.style.overflowWrap = 'break-word';
-    
+
     const texto = subtituloEl.textContent || subtituloEl.innerText;
     if (!texto.trim()) return;
-    
+
     const temp = document.createElement('span');
     temp.style.position = 'absolute';
     temp.style.visibility = 'hidden';
@@ -421,12 +421,12 @@ function ajustarSubtituloPreview() {
     temp.style.textTransform = 'uppercase';
     temp.textContent = texto;
     document.body.appendChild(temp);
-    
+
     const larguraTexto = temp.offsetWidth;
     const larguraDisponivel = 880;
-    
+
     document.body.removeChild(temp);
-    
+
     if (larguraTexto <= larguraDisponivel) {
         subtituloEl.style.whiteSpace = 'nowrap';
     } else {
@@ -441,50 +441,50 @@ let currentZoom = 0.58;
 function ajustarZoom(delta) {
     currentZoom = Math.max(0.4, Math.min(1, currentZoom + delta));
     const wrapper = document.getElementById('previewWrapper');
-    
+
     if (currentZoom >= 1) {
         wrapper.style.transformOrigin = 'top left';
     } else {
         wrapper.style.transformOrigin = 'center center';
     }
-    
+
     wrapper.style.transform = `scale(${currentZoom})`;
     const zoomPercent = Math.round(currentZoom * 100);
     document.getElementById('zoomLevel').textContent = zoomPercent + '%';
-    
+
     centralizarPreview();
 }
 
 function ajustarZoomParaCaber() {
     const container = document.querySelector('.preview-container');
     const wrapper = document.getElementById('previewWrapper');
-    
+
     if (!container || !wrapper) return;
-    
+
     const arteWidth = 1000;
     const arteHeight = 1300;
-    
+
     const containerWidth = container.clientWidth - 56;
     const containerHeight = container.clientHeight - 56;
-    
+
     const zoomX = containerWidth / arteWidth;
     const zoomY = containerHeight / arteHeight;
-    
+
     const zoomIdeal = Math.min(zoomX, zoomY, 1);
-    
+
     currentZoom = Math.max(0.4, Math.min(1, zoomIdeal));
-    
+
     if (currentZoom >= 1) {
         wrapper.style.transformOrigin = 'top left';
     } else {
         wrapper.style.transformOrigin = 'center center';
     }
-    
+
     wrapper.style.transform = `scale(${currentZoom})`;
-    
+
     const zoomPercent = Math.round(currentZoom * 100);
     document.getElementById('zoomLevel').textContent = zoomPercent + '%';
-    
+
     centralizarPreview();
 }
 
@@ -492,7 +492,7 @@ function ajustarZoomParaCaber() {
 function atualizarInfoFormulario() {
     const modoEdicao = document.getElementById('modo_edicao').value === 'true';
     const comunicadoId = document.getElementById('comunicado_id').value;
-    
+
     const statusStat = document.getElementById('formStatusStat');
     const statusText = document.getElementById('formStatusText');
     if (statusStat && statusText) {
@@ -507,7 +507,7 @@ function atualizarInfoFormulario() {
             statusStat.style.color = '#64748b';
         }
     }
-    
+
     // Calcular progresso
     const campos = {
         tipo: getTituloValue(),
@@ -516,11 +516,11 @@ function atualizarInfoFormulario() {
         rodape: document.getElementById('rodape').value,
         publico_alvo: document.getElementById('publico_alvo').value
     };
-    
+
     const camposPreenchidos = Object.values(campos).filter(v => v && v.trim().length > 0).length;
     const totalCampos = Object.keys(campos).length;
     const progresso = Math.round((camposPreenchidos / totalCampos) * 100);
-    
+
     const progressStat = document.getElementById('formProgressStat');
     const progressText = document.getElementById('formProgressText');
     if (progressStat && progressText) {
@@ -542,9 +542,9 @@ function atualizarInfoPreview() {
     const corpoTexto = corpoEl ? (corpoEl.innerText || corpoEl.textContent || '').trim() : '';
     const rodape = document.getElementById('rodape').value;
     const publicoAlvo = document.getElementById('publico_alvo').value;
-    
+
     const temConteudo = titulo || subtitulo || corpoTexto || rodape || publicoAlvo;
-    
+
     const statusStat = document.getElementById('previewStatusStat');
     if (statusStat) {
         if (temConteudo) {
@@ -555,7 +555,7 @@ function atualizarInfoPreview() {
             statusStat.style.color = '#94a3b8';
         }
     }
-    
+
     const contentStat = document.getElementById('previewContentStat');
     const contentInfo = document.getElementById('previewContentInfo');
     if (contentStat && contentInfo) {
@@ -575,20 +575,20 @@ function atualizarInfoPreview() {
 function centralizarPreview() {
     const container = document.querySelector('.preview-container');
     const wrapper = document.getElementById('previewWrapper');
-    
+
     if (!container || !wrapper) return;
-    
+
     setTimeout(() => {
         const arteWidth = 1000 * currentZoom;
         const arteHeight = 1300 * currentZoom;
-        
+
         const containerWidth = container.clientWidth;
         const containerHeight = container.clientHeight;
-        
+
         if (arteWidth < containerWidth && arteHeight < containerHeight) {
             const scrollLeft = (arteWidth - containerWidth) / 2;
             const scrollTop = (arteHeight - containerHeight) / 2;
-            
+
             container.scrollTo({
                 left: Math.max(0, scrollLeft),
                 top: Math.max(0, scrollTop),
@@ -608,7 +608,7 @@ function centralizarPreview() {
 function toggleAccordion(element) {
     const content = element.nextElementSibling;
     const icon = element.querySelector('.accordion-icon');
-    
+
     if (content.classList.contains('open')) {
         content.classList.remove('open');
         icon.classList.remove('open');
@@ -626,18 +626,18 @@ function adjustValue(event, inputId, delta) {
         event.preventDefault();
         event.stopPropagation();
     }
-    
+
     const input = document.getElementById(inputId);
     if (!input) return false;
-    
+
     const currentValue = parseInt(input.value) || 0;
     const min = parseInt(input.min) || 0;
     const max = parseInt(input.max) || 1000;
     const step = parseInt(input.step) || 1;
-    
+
     let newValue = currentValue + (delta * step);
     newValue = Math.max(min, Math.min(max, newValue));
-    
+
     input.value = newValue;
     atualizarPreview();
     startAutoSave();
@@ -649,19 +649,19 @@ function resetElement(event, elementType, posX, posY, tamanho) {
         event.preventDefault();
         event.stopPropagation();
     }
-    
+
     if (elementType === 'tipo') {
         const tipoSelect = document.getElementById('tipo');
         const tipoPersonalizadoCheckbox = document.getElementById('tipoPersonalizado');
-        
-        if (tipoSelect && !tipoPersonalizadoCheckbox.checked && 
+
+        if (tipoSelect && !tipoPersonalizadoCheckbox.checked &&
             (tipoSelect.value === 'Indisponibilidade' || tipoSelect.value === 'Instabilidade' || tipoSelect.value === 'Degradação' || tipoSelect.value === 'Normalização')) {
             posX = 60;
             posY = 120;
             tamanho = 60;
         }
     }
-    
+
     document.getElementById(`${elementType}_pos_x`).value = posX;
     document.getElementById(`${elementType}_pos_y`).value = posY;
     document.getElementById(`${elementType}_tamanho`).value = tamanho;
@@ -675,8 +675,8 @@ function aplicarPreset(event, presetType) {
         event.preventDefault();
         event.stopPropagation();
     }
-    
-    switch(presetType) {
+
+    switch (presetType) {
         case 'centralizar':
             document.getElementById('tipo_pos_x').value = 60;
             document.getElementById('subtitulo_pos_x').value = 0;
@@ -684,7 +684,7 @@ function aplicarPreset(event, presetType) {
             document.getElementById('rodape_pos_x').value = 0;
             document.getElementById('publico_alvo_pos_x').value = 60;
             break;
-            
+
         case 'resetar':
             resetElement(null, 'tipo', 60, 80, 42);
             resetElement(null, 'subtitulo', 0, 430, 32);
@@ -692,13 +692,13 @@ function aplicarPreset(event, presetType) {
             resetElement(null, 'rodape', 60, 1000, 24);
             resetElement(null, 'publico_alvo', 60, 1120, 16);
             break;
-            
+
         case 'compacto':
             document.getElementById('corpo_pos_y').value = 550;
             document.getElementById('rodape_pos_y').value = 900;
             document.getElementById('publico_alvo_pos_y').value = 1120;
             break;
-            
+
         case 'espacado':
             document.getElementById('corpo_pos_y').value = 480;
             document.getElementById('rodape_pos_y').value = 1000;
@@ -716,37 +716,37 @@ function preencherDadosTeste(event) {
         event.preventDefault();
         event.stopPropagation();
     }
-    
+
     const tipoPersonalizadoCheckbox = document.getElementById('tipoPersonalizado');
     if (tipoPersonalizadoCheckbox && tipoPersonalizadoCheckbox.checked) {
         tipoPersonalizadoCheckbox.checked = false;
         toggleTipoCustom();
     }
-    
+
     const tipoSelect = document.getElementById('tipo');
     if (tipoSelect) {
         tipoSelect.value = 'Indisponibilidade';
         tipoSelect.disabled = false;
     }
-    
+
     const subtituloInput = document.getElementById('subtitulo');
     if (subtituloInput) {
         subtituloInput.value = 'INDISPONIBILIDADE DO SCOUT';
     }
-    
+
     const corpoDiv = document.getElementById('corpo');
     if (corpoDiv) {
         corpoDiv.innerHTML = 'Informamos que estamos com um impacto global na AWS, impactando os serviços do Scout.<br><br>Os times estão acompanhando, e assim que normalizar informaremos.';
     }
-    
+
     const publicoAlvoSelect = document.getElementById('publico_alvo');
     if (publicoAlvoSelect) {
         publicoAlvoSelect.value = 'Enviado para um público específico.';
     }
-    
+
     atualizarPreview();
     startAutoSave();
-    
+
     const buttons = document.querySelectorAll('.preset-btn');
     buttons.forEach(btn => {
         if (btn.textContent.includes('Dados de Teste')) {
@@ -767,14 +767,14 @@ function preencherDadosTeste(event) {
 function atualizarEstiloTipoSelect() {
     const tipoSelect = document.getElementById('tipo');
     const tipoIcon = document.getElementById('tipoIcon');
-    
+
     if (!tipoSelect || !tipoIcon) return;
-    
+
     tipoSelect.classList.remove('alert-indisponibilidade', 'alert-instabilidade', 'alert-degradacao', 'success-normalizacao');
     tipoIcon.textContent = '';
-    
+
     const tipoSelecionado = tipoSelect.value;
-    
+
     if (tipoSelecionado === 'Indisponibilidade') {
         tipoSelect.classList.add('alert-indisponibilidade');
         tipoIcon.textContent = '🚨';
@@ -795,18 +795,18 @@ function selecionarTemplatePorTipo() {
     const tipoSelect = document.getElementById('tipo');
     const templateInput = document.getElementById('template');
     const tipoPersonalizadoCheckbox = document.getElementById('tipoPersonalizado');
-    
+
     if (!tipoSelect || !templateInput) return;
-    
+
     if (tipoPersonalizadoCheckbox && tipoPersonalizadoCheckbox.checked) {
         atualizarEstiloTipoSelect();
         return;
     }
-    
+
     const tipoSelecionado = tipoSelect.value;
-    
+
     atualizarEstiloTipoSelect();
-    
+
     if (tipoSelecionado === 'Instabilidade') {
         templateInput.value = '2';
         document.getElementById('tipo_pos_x').value = '60';
@@ -828,7 +828,7 @@ function selecionarTemplatePorTipo() {
         document.getElementById('tipo_pos_y').value = '120';
         document.getElementById('tipo_tamanho').value = '60';
     }
-    
+
     atualizarPreview();
 }
 
@@ -837,14 +837,14 @@ window.addEventListener('DOMContentLoaded', () => {
     atualizarPreview();
     atualizarInfoPreview();
     atualizarInfoFormulario();
-    
+
     const tipoCustomEl = document.getElementById('tipoCustom');
     if (tipoCustomEl && tipoCustomEl.value) {
         atualizarCharCounter('tipoCustom', 'tipoCustomCounter', 20);
     }
-    
+
     atualizarEstatisticasCorpo();
-    
+
     const subtituloInput = document.getElementById('subtitulo');
     if (subtituloInput) {
         subtituloInput.addEventListener('input', () => {
@@ -854,34 +854,34 @@ window.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    
+
     const tipoSelect = document.getElementById('tipo');
     if (tipoSelect) {
         tipoSelect.addEventListener('change', selecionarTemplatePorTipo);
         atualizarEstiloTipoSelect();
     }
-    
+
     // Verificar se há ID na URL para modo de edição
     const urlParams = new URLSearchParams(window.location.search);
     const comunicadoId = urlParams.get('editar');
     if (comunicadoId) {
         carregarComunicado(comunicadoId);
     }
-    
+
     // Adicionar evento para limpar formatação ao colar
     const corpoElement = document.getElementById('corpo');
-    corpoElement.addEventListener('paste', function(e) {
+    corpoElement.addEventListener('paste', function (e) {
         e.preventDefault();
         const text = (e.originalEvent || e).clipboardData.getData('text/plain');
         document.execCommand('insertText', false, text);
         setTimeout(() => atualizarEstatisticasCorpo(), 10);
         atualizarPreview();
     });
-    
+
     // Configurar event listeners
     addChangeListener('template');
     addChangeListener('tipo');
-    
+
     if (tipoCustomEl) {
         tipoCustomEl.addEventListener('input', () => {
             atualizarCharCounter('tipoCustom', 'tipoCustomCounter', 20);
@@ -893,9 +893,9 @@ window.addEventListener('DOMContentLoaded', () => {
             startAutoSave();
         });
     }
-    
+
     addInputListener('subtitulo');
-    
+
     const corpoEl = document.getElementById('corpo');
     if (corpoEl) {
         corpoEl.addEventListener('input', () => {
@@ -910,10 +910,10 @@ window.addEventListener('DOMContentLoaded', () => {
             startAutoSave();
         });
     }
-    
+
     addInputListener('rodape');
     addInputListener('publico_alvo');
-    
+
     // Event listeners para controles de posição
     addInputListener('tipo_pos_x');
     addInputListener('tipo_pos_y');
@@ -940,17 +940,17 @@ async function carregarComunicado(id) {
     try {
         const response = await fetch(`/comunicado/${id}`);
         const com = await response.json();
-        
+
         document.getElementById('comunicado_id').value = com.id;
         document.getElementById('modo_edicao').value = 'true';
         document.getElementById('pageTitle').textContent = `Editando ${com.codigo_unico}`;
         document.getElementById('formPanelSubtitle').textContent = `Comunicado ${com.codigo_unico}`;
         atualizarInfoFormulario();
-        
+
         if (com.template_id) {
             document.getElementById('template').value = com.template_id;
         }
-        
+
         if (com.titulo.includes('Indisponibilidade') || com.titulo.includes('Instabilidade') || com.titulo.includes('Degradação') || com.titulo.includes('Normalização')) {
             document.getElementById('tipo').value = com.titulo;
             atualizarEstiloTipoSelect();
@@ -963,14 +963,14 @@ async function carregarComunicado(id) {
             document.getElementById('tipoCustom').value = com.titulo;
             atualizarCharCounter('tipoCustom', 'tipoCustomCounter', 20);
         }
-        
+
         document.getElementById('subtitulo').value = com.subtitulo || '';
         document.getElementById('corpo').innerHTML = com.corpo || '';
         document.getElementById('rodape').value = com.rodape || 'Em caso de dúvidas consulte o Service Desk no telefone 3003-7000.';
         document.getElementById('publico_alvo').value = com.publico_alvo || '';
-        
+
         setTimeout(() => atualizarEstatisticasCorpo(), 100);
-        
+
         const tipoPersonalizadoCheckbox = document.getElementById('tipoPersonalizado');
         if (tipoPersonalizadoCheckbox && tipoPersonalizadoCheckbox.checked) {
             document.getElementById('tipoCustom_pos_x').value = com.tipo_pos_x;
@@ -997,7 +997,7 @@ async function carregarComunicado(id) {
         document.getElementById('rodape_pos_y').value = com.rodape_pos_y;
         document.getElementById('publico_alvo_pos_x').value = com.publico_alvo_pos_x || 60;
         document.getElementById('publico_alvo_pos_y').value = com.publico_alvo_pos_y || 1120;
-        
+
         atualizarPreview();
         lastSavedData = JSON.stringify(coletarDadosFormulario());
     } catch (error) {
@@ -1010,11 +1010,11 @@ async function salvarRascunho() {
     showSavingIndicator('Salvando rascunho...', 'saving');
     const dados = coletarDadosFormulario();
     dados.status = 'rascunho';
-    
+
     try {
         const comunicadoId = document.getElementById('comunicado_id').value;
         let response;
-        
+
         if (comunicadoId) {
             response = await fetch(`/comunicado/${comunicadoId}`, {
                 method: 'PUT',
@@ -1028,7 +1028,7 @@ async function salvarRascunho() {
                 body: JSON.stringify(dados)
             });
         }
-        
+
         const data = await response.json();
         if (data.success) {
             lastSavedData = JSON.stringify(dados);
@@ -1036,10 +1036,10 @@ async function salvarRascunho() {
             const successMsg = document.getElementById('successMessage');
             successMsg.textContent = `✅ Rascunho ${data.codigo} salvo com sucesso!`;
             successMsg.style.display = 'block';
-            
+
             document.getElementById('comunicado_id').value = data.id;
             document.getElementById('modo_edicao').value = 'true';
-            
+
             setTimeout(() => {
                 successMsg.style.display = 'none';
                 window.location.href = '/historico';
@@ -1055,7 +1055,7 @@ async function salvarRascunho() {
 function coletarDadosFormulario() {
     const tipoPersonalizadoCheckbox = document.getElementById('tipoPersonalizado');
     const usarTituloPersonalizado = tipoPersonalizadoCheckbox && tipoPersonalizadoCheckbox.checked;
-    
+
     return {
         template_id: document.getElementById('template').value,
         titulo: getTituloValue(),
@@ -1087,11 +1087,11 @@ document.getElementById('comunicadoForm').addEventListener('submit', async (e) =
     e.preventDefault();
     const dados = coletarDadosFormulario();
     dados.status = 'enviado';
-    
+
     try {
         const comunicadoId = document.getElementById('comunicado_id').value;
         let response;
-        
+
         if (comunicadoId) {
             response = await fetch(`/comunicado/${comunicadoId}`, {
                 method: 'PUT',
@@ -1125,36 +1125,36 @@ function abrirModalAcessibilidade() {
     const corpoEl = document.getElementById('corpo');
     const rodapeEl = document.getElementById('rodape');
     const publicoAlvoEl = document.getElementById('publico_alvo');
-    
+
     const subtitulo = (subtituloEl && subtituloEl.value) ? subtituloEl.value.trim() : '';
     const corpo = (corpoEl && corpoEl.innerText) ? corpoEl.innerText.trim() : '';
     const rodape = (rodapeEl && rodapeEl.value) ? rodapeEl.value.trim() : '';
     const publico_alvo = (publicoAlvoEl && publicoAlvoEl.value) ? publicoAlvoEl.value.trim() : '';
-    
+
     if (!subtitulo && !corpo && !rodape && !publico_alvo) {
         alert('Preencha pelo menos um campo antes de gerar o texto de acessibilidade.');
         return;
     }
-    
+
     let textoHTML = '<div style="font-family: Verdana, sans-serif; font-size: 8pt; text-align: center; line-height: 1.6;">';
     textoHTML += '<p><strong>#ParaTodosVerem</strong></p>';
-    
+
     if (subtitulo) textoHTML += `<p>${limparHTML(subtitulo)}</p>`;
     if (corpo) textoHTML += `<p>${limparHTML(corpo)}</p>`;
     if (rodape) textoHTML += `<p>${limparHTML(rodape)}</p>`;
     if (publico_alvo) textoHTML += `<p>${limparHTML(publico_alvo)}</p>`;
-    
+
     textoHTML += '</div>';
-    
+
     let textoPuro = '#ParaTodosVerem\n';
     if (subtitulo) textoPuro += limparHTML(subtitulo) + '\n';
     if (corpo) textoPuro += limparHTML(corpo) + '\n';
     if (rodape) textoPuro += limparHTML(rodape) + '\n';
     if (publico_alvo) textoPuro += limparHTML(publico_alvo);
-    
+
     const previewElement = document.getElementById('acessibilidadePreview');
     const modalElement = document.getElementById('modalAcessibilidade');
-    
+
     if (previewElement && modalElement) {
         previewElement.innerHTML = textoHTML;
         window.acessibilidadeHTMLCache = textoPuro;
@@ -1173,14 +1173,14 @@ function fecharModalAcessibilidade() {
 
 function copiarTextoAcessibilidade(event) {
     const textoPuro = window.acessibilidadeHTMLCache;
-    
+
     if (!textoPuro) {
         alert('Nenhum texto para copiar. Tente gerar novamente.');
         return;
     }
-    
+
     const btn = event ? event.target : document.querySelector('button[onclick*="copiarTextoAcessibilidade"]');
-    
+
     if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(textoPuro).then(() => {
             atualizarBotaoCopiado(btn);
@@ -1198,7 +1198,7 @@ function atualizarBotaoCopiado(btn) {
     const originalText = btn.textContent;
     btn.textContent = '✓ Copiado!';
     btn.style.background = '#10b981';
-    
+
     setTimeout(() => {
         btn.textContent = originalText;
         btn.style.background = '';
@@ -1212,7 +1212,7 @@ function fallbackCopyText(text, btn) {
     textarea.style.opacity = '0';
     document.body.appendChild(textarea);
     textarea.select();
-    
+
     try {
         document.execCommand('copy');
         atualizarBotaoCopiado(btn);
