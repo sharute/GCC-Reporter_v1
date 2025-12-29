@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Comunicados - GCC Repórter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/criar_comunicado.css">
+</head>
+<body>
+    <!-- Indicador de salvamento -->
+    <div class="saving-indicator" id="savingIndicator">
+        <div class="spinner"></div>
+        <span id="savingText">Salvando...</span>
+    </div>
+
+    <div class="page-content">
+        <header class="header">
+            <div class="header-inner">
+            <div class="header-brand">
+                    <div class="brand-logo">
+                <img src="/static/img/logo/logo_rounded.png" alt="Globo">
+                </div>
+                    <div class="brand-text">
+                        <h1>GCC Repórter</h1>
+                        <span class="tagline">Gestão de Comunicados</span>
+            </div>
+            </div>
+                
+                <nav class="header-nav">
+                    <a href="/criar-comunicado" class="nav-item active">
+                        <span class="nav-icon">📝</span>
+                        <span>Novo Comunicado</span>
+                    </a>
+                    <a href="/historico" class="nav-item">
+                        <span class="nav-icon">📋</span>
+                        <span>Histórico</span>
+                    </a>
+                </nav>
+        </div>
+        </header>
+
+    <div class="container">
+        <div class="form-panel">
+            <div class="form-panel-header">
+                <div class="form-panel-header-left">
+                    <div class="form-panel-icon">📝</div>
+                    <div class="form-panel-title-group">
+                        <h3 id="pageTitle">Dados do Comunicado</h3>
+                        <span id="formPanelSubtitle">Preencha os campos abaixo</span>
+                    </div>
+                </div>
+                <div class="form-panel-stats">
+                    <div class="form-panel-stat" id="formStatusStat" title="Status do formulário">
+                        <span class="form-panel-stat-icon">📋</span>
+                        <span id="formStatusText">Novo</span>
+                    </div>
+                    <div class="form-panel-stat" id="formProgressStat" title="Progresso do preenchimento">
+                        <span class="form-panel-stat-icon">✓</span>
+                        <span id="formProgressText">0%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="success-message" id="successMessage"></div>
+            
+            <form id="comunicadoForm">
+                <input type="hidden" id="template" name="template_id" value="1">
+                <input type="hidden" id="comunicado_id" name="comunicado_id" value="">
+                <input type="hidden" id="modo_edicao" name="modo_edicao" value="false">
+
+                <!-- Card Tipo -->
+                <div class="field-card">
+                    <div class="field-card-header">
+                        <span class="field-card-icon">🏷️</span>
+                        <span class="field-card-title">Tipo do Comunicado</span>
+                    </div>
+                    <div class="form-group">
+                        <div class="select-wrapper">
+                            <select id="tipo" name="titulo" required>
+                                <option value="">Selecione o tipo</option>
+                                <option value="Indisponibilidade">Indisponibilidade</option>
+                                <option value="Instabilidade">Instabilidade</option>
+                                <option value="Degradação">Degradação</option>
+                                <option value="Normalização">Normalização</option>
+                            </select>
+                            <span class="select-icon" id="tipoIcon"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="tipoPersonalizado" onchange="toggleTipoCustom()">
+                            <span class="checkbox-text">Usar tipo personalizado</span>
+                        </label>
+                    </div>
+                    <div class="form-group" id="tipoCustomGroup" style="display: none;">
+                        <label for="tipoCustom">Tipo Personalizado * <span id="tipoCustomCounter" class="char-counter">0/20</span></label>
+                        <input type="text" id="tipoCustom" name="titulo_custom" placeholder="Digite o tipo personalizado" maxlength="20">
+                    </div>
+                </div>
+
+                <!-- Card Subtítulo -->
+                <div class="field-card">
+                    <div class="field-card-header">
+                        <span class="field-card-icon">📍</span>
+                        <span class="field-card-title">Subtítulo</span>
+                    </div>
+                    <div class="form-group">
+                        <div style="position: relative; display: flex; align-items: center; gap: 8px;">
+                            <input type="text" id="subtitulo" name="subtitulo" placeholder="Ex: Telefonia fixa - São Paulo" style="flex: 1;">
+                            <button type="button" class="uppercase-btn" id="subtituloCaseBtn" onclick="toggleSubtituloCase()" title="Alternar entre maiúsculas, minúsculas e primeira letra maiúscula" data-state="normal">
+                                Aa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Descrição -->
+                <div class="field-card">
+                    <div class="field-card-header">
+                        <span class="field-card-icon">✍️</span>
+                        <span class="field-card-title">Descrição / Corpo</span>
+                    </div>
+                    <div class="form-group">
+                        <div class="editor-toolbar">
+                            <button type="button" class="editor-btn" onclick="formatText('bold')" title="Negrito"><b>B</b></button>
+                            <button type="button" class="editor-btn" onclick="formatText('italic')" title="Itálico"><i>I</i></button>
+                            <button type="button" class="editor-btn" onclick="formatText('underline')" title="Sublinhado"><u>U</u></button>
+                            
+                            <div class="toolbar-divider"></div>
+                            
+                            <button type="button" class="editor-btn align-btn" data-align="left" onclick="setAlign('left')" title="Alinhar à esquerda">
+                                <div class="editor-btn-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M3 6h18M3 12h12M3 18h18"/>
+                                    </svg>
+                        </div>
+                            </button>
+                            <button type="button" class="editor-btn align-btn" data-align="center" onclick="setAlign('center')" title="Centralizar">
+                                <div class="editor-btn-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M6 6h12M9 12h6M6 18h12"/>
+                                    </svg>
+                                    </div>
+                            </button>
+                            <button type="button" class="editor-btn align-btn" data-align="right" onclick="setAlign('right')" title="Alinhar à direita">
+                                <div class="editor-btn-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M3 6h18M9 12h12M3 18h18"/>
+                                    </svg>
+                                    </div>
+                            </button>
+                            <button type="button" class="editor-btn align-btn active" data-align="justify" onclick="setAlign('justify')" title="Justificar">
+                                <div class="editor-btn-icon">
+                                    <svg viewBox="0 0 24 24">
+                                        <path d="M3 6h18M3 12h18M3 18h18"/>
+                                    </svg>
+                                </div>
+                            </button>
+                                </div>
+                        <input type="hidden" id="corpo_alinhamento" name="corpo_alinhamento" value="justify">
+                        <div id="corpo" contenteditable="true" style="min-height: 120px; padding: 12px; border: 1px solid #d1d5db; border-radius: 8px; background: #fff; color: #1e293b; outline: none; text-align: justify;"></div>
+                        <div class="corpo-stats" style="display: flex; justify-content: flex-end; align-items: center; gap: 12px; margin-top: 8px; padding-top: 8px; border-top: 1px solid #f1f5f9;">
+                            <span id="corpoCharCounter" class="char-counter-discreto">0 caracteres</span>
+                            <span id="corpoWordCounter" class="char-counter-discreto">0 palavras</span>
+                            <span id="corpoReadTime" class="char-counter-discreto" style="display: none;">~0 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Informações Adicionais -->
+                <div class="field-card">
+                    <div class="field-card-header">
+                        <span class="field-card-icon">ℹ️</span>
+                        <span class="field-card-title">Informações Adicionais</span>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="rodape" name="rodape">Em caso de dúvidas consulte o Service Desk no telefone 3003-7000.</textarea>
+                    </div>
+                </div>
+
+                <!-- Card Público Alvo -->
+                <div class="field-card">
+                    <div class="field-card-header">
+                        <span class="field-card-icon">👥</span>
+                        <span class="field-card-title">Público Alvo</span>
+                    </div>
+                    <div class="form-group">
+                        <select id="publico_alvo" name="publico_alvo">
+                            <option value="">Selecione o público alvo</option>
+                            <option value="Enviado para um público específico.">Enviado para um público específico.</option>
+                            <option value="Enviado para toda a tecnologia.">Enviado para toda a tecnologia.</option>
+                            <option value="Enviado para toda a Globo.">Enviado para toda a Globo.</option>
+                        </select>
+                    </div>
+                </div>
+                    
+                <!-- Accordion Único de Ajustes Avançados -->
+                <div class="position-accordion" style="margin-top: 20px;">
+                        <button type="button" class="accordion-toggle" onclick="toggleAccordion(this)" aria-expanded="false" aria-controls="accordion-content">
+                            <span class="accordion-toggle-text">
+                            <span>🎨</span>
+                            <span>Posicionamento e Tamanhos</span>
+                            </span>
+                            <span class="accordion-icon">▼</span>
+                        </button>
+                        <div class="accordion-content" id="accordion-content">
+                            <div class="accordion-inner">
+                            <!-- Título -->
+                            <div class="element-control-card" style="--element-color: #f59e0b; --element-bg: rgba(245, 158, 11, 0.1);">
+                                <div class="element-control-header">
+                                    <div class="element-control-title">
+                                        <div class="element-control-icon">🏷️</div>
+                                        <span class="element-control-title-text">Título</span>
+                                    </div>
+                                    <button type="button" class="element-reset-btn" onclick="resetElement(event, 'tipo', 60, 80, 42); return false;" title="Restaurar valores padrão">
+                                        <span>↺</span>
+                                        <span>Padrão</span>
+                                    </button>
+                                    </div>
+                                <div class="input-group-grid">
+                                    <div class="input-group">
+                                        <label for="tipo_pos_x">Posição X</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="tipo_pos_x" name="tipo_pos_x" value="60" min="0" max="1000" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipo_pos_x', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipo_pos_x', -5); return false;">▼</button>
+                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="tipo_pos_y">Posição Y</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="tipo_pos_y" name="tipo_pos_y" value="80" min="0" max="1300" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipo_pos_y', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipo_pos_y', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="tipo_tamanho">Tamanho (px)</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="tipo_tamanho" name="tipo_tamanho" value="42" min="12" max="100" step="2">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipo_tamanho', 2); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipo_tamanho', -2); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Título Personalizado -->
+                            <div class="element-control-card" id="posicionamentoTituloPersonalizadoCard" style="display: none; --element-color: #8b5cf6; --element-bg: rgba(139, 92, 246, 0.1);">
+                                <div class="element-control-header">
+                                    <div class="element-control-title">
+                                        <div class="element-control-icon">✏️</div>
+                                        <span class="element-control-title-text">Título Personalizado</span>
+                                    </div>
+                                    <button type="button" class="element-reset-btn" onclick="resetTituloPersonalizado(event); return false;" title="Restaurar valores padrão">
+                                        <span>↺</span>
+                                        <span>Padrão</span>
+                                    </button>
+                                </div>
+                                <div class="input-group-grid">
+                                    <div class="input-group">
+                                        <label for="tipoCustom_pos_x">Posição X</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="tipoCustom_pos_x" name="tipoCustom_pos_x" value="30" min="0" max="1000" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipoCustom_pos_x', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipoCustom_pos_x', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="tipoCustom_pos_y">Posição Y</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="tipoCustom_pos_y" name="tipoCustom_pos_y" value="150" min="0" max="1300" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipoCustom_pos_y', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipoCustom_pos_y', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="tipoCustom_tamanho">Tamanho (px)</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="tipoCustom_tamanho" name="tipoCustom_tamanho" value="56" min="12" max="100" step="2">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipoCustom_tamanho', 2); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'tipoCustom_tamanho', -2); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Subtítulo -->
+                            <div class="element-control-card" style="--element-color: #ef4444; --element-bg: rgba(239, 68, 68, 0.1);">
+                                <div class="element-control-header">
+                                    <div class="element-control-title">
+                                        <div class="element-control-icon">📍</div>
+                                        <span class="element-control-title-text">Subtítulo</span>
+                                    </div>
+                                    <button type="button" class="element-reset-btn" onclick="resetElement(event, 'subtitulo', 0, 430, 32); return false;" title="Restaurar valores padrão">
+                                        <span>↺</span>
+                                        <span>Padrão</span>
+                                    </button>
+                                </div>
+                                <div class="input-group-grid">
+                                    <div class="input-group">
+                                        <label for="subtitulo_pos_x">Posição X</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="subtitulo_pos_x" name="subtitulo_pos_x" value="0" min="0" max="1000" step="5" placeholder="Auto">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'subtitulo_pos_x', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'subtitulo_pos_x', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="subtitulo_pos_y">Posição Y</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="subtitulo_pos_y" name="subtitulo_pos_y" value="430" min="0" max="1300" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'subtitulo_pos_y', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'subtitulo_pos_y', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="subtitulo_tamanho">Tamanho (px)</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="subtitulo_tamanho" name="subtitulo_tamanho" value="32" min="12" max="100" step="2">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'subtitulo_tamanho', 2); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'subtitulo_tamanho', -2); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Descrição/Corpo -->
+                            <div class="element-control-card" style="--element-color: #10b981; --element-bg: rgba(16, 185, 129, 0.1);">
+                                <div class="element-control-header">
+                                    <div class="element-control-title">
+                                        <div class="element-control-icon">✍️</div>
+                                        <span class="element-control-title-text">Descrição / Corpo</span>
+                                    </div>
+                                    <button type="button" class="element-reset-btn" onclick="resetElement(event, 'corpo', 60, 510, 24); return false;" title="Restaurar valores padrão">
+                                        <span>↺</span>
+                                        <span>Padrão</span>
+                                    </button>
+                                </div>
+                                <div class="input-group-grid">
+                                    <div class="input-group">
+                                        <label for="corpo_pos_x">Posição X</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="corpo_pos_x" name="corpo_pos_x" value="60" min="0" max="1000" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'corpo_pos_x', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'corpo_pos_x', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="corpo_pos_y">Posição Y</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="corpo_pos_y" name="corpo_pos_y" value="510" min="0" max="1300" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'corpo_pos_y', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'corpo_pos_y', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="corpo_tamanho">Tamanho (px)</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="corpo_tamanho" name="corpo_tamanho" value="24" min="12" max="100" step="2">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'corpo_tamanho', 2); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'corpo_tamanho', -2); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Informações Adicionais -->
+                            <div class="element-control-card" style="--element-color: #3b82f6; --element-bg: rgba(59, 130, 246, 0.1);">
+                                <div class="element-control-header">
+                                    <div class="element-control-title">
+                                        <div class="element-control-icon">ℹ️</div>
+                                        <span class="element-control-title-text">Informações Adicionais</span>
+                                    </div>
+                                    <button type="button" class="element-reset-btn" onclick="resetElement(event, 'rodape', 60, 1000, 24); return false;" title="Restaurar valores padrão">
+                                        <span>↺</span>
+                                        <span>Padrão</span>
+                                    </button>
+                                </div>
+                                <div class="input-group-grid">
+                                    <div class="input-group">
+                                        <label for="rodape_pos_x">Posição X</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="rodape_pos_x" name="rodape_pos_x" value="60" min="0" max="1000" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'rodape_pos_x', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'rodape_pos_x', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="rodape_pos_y">Posição Y</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="rodape_pos_y" name="rodape_pos_y" value="1000" min="0" max="1300" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'rodape_pos_y', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'rodape_pos_y', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="rodape_tamanho">Tamanho (px)</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="rodape_tamanho" name="rodape_tamanho" value="24" min="12" max="100" step="2">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'rodape_tamanho', 2); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'rodape_tamanho', -2); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Público Alvo -->
+                            <div class="element-control-card" style="--element-color: #8b5cf6; --element-bg: rgba(139, 92, 246, 0.1);">
+                                <div class="element-control-header">
+                                    <div class="element-control-title">
+                                        <div class="element-control-icon">👥</div>
+                                        <span class="element-control-title-text">Público Alvo</span>
+                                    </div>
+                                    <button type="button" class="element-reset-btn" onclick="resetElement(event, 'publico_alvo', 60, 1120, 16); return false;" title="Restaurar valores padrão">
+                                        <span>↺</span>
+                                        <span>Padrão</span>
+                                    </button>
+                                </div>
+                                <div class="input-group-grid">
+                                    <div class="input-group">
+                                        <label for="publico_alvo_pos_x">Posição X</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="publico_alvo_pos_x" name="publico_alvo_pos_x" value="60" min="0" max="1000" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue('publico_alvo_pos_x', 5)">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'publico_alvo_pos_x', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="publico_alvo_pos_y">Posição Y</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="publico_alvo_pos_y" name="publico_alvo_pos_y" value="1120" min="0" max="1300" step="5">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'publico_alvo_pos_y', 5); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'publico_alvo_pos_y', -5); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="publico_alvo_tamanho">Tamanho (px)</label>
+                                        <div class="input-with-controls">
+                                            <input type="number" id="publico_alvo_tamanho" name="publico_alvo_tamanho" value="16" min="12" max="100" step="2">
+                                            <div class="input-controls">
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'publico_alvo_tamanho', 2); return false;">▲</button>
+                                                <button type="button" class="input-btn" onclick="adjustValue(event, 'publico_alvo_tamanho', -2); return false;">▼</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Presets Rápidos -->
+                            <div class="presets-section">
+                                <div class="presets-title">⚡ Ações Rápidas</div>
+                                <div class="presets-grid">
+                                    <button type="button" class="preset-btn" onclick="aplicarPreset(event, 'resetar'); return false;">
+                                        <span>↺</span>
+                                        <span>Restaurar Padrões</span>
+                                    </button>
+                                    <button type="button" class="preset-btn" onclick="aplicarPreset(event, 'compacto'); return false;">
+                                        <span>📐</span>
+                                        <span>Layout Compacto</span>
+                                    </button>
+                                    <button type="button" class="preset-btn" onclick="aplicarPreset(event, 'espacado'); return false;">
+                                        <span>📏</span>
+                                        <span>Layout Espaçado</span>
+                                    </button>
+                                    <button type="button" class="preset-btn" onclick="preencherDadosTeste(event); return false;" style="background: #fef3c7; border-color: #fbbf24; color: #92400e;">
+                                        <span>🧪</span>
+                                        <span>Dados de Teste</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="preview-panel">
+            <!-- Header da Prévia -->
+            <div class="preview-header">
+                <div class="preview-header-left">
+                    <div class="preview-icon">🎨</div>
+                    <div class="preview-title-group">
+                        <h3>Prévia do Comunicado</h3>
+                        <span>Visualização em tempo real</span>
+                    </div>
+                </div>
+                <div class="preview-stats">
+                    <div class="preview-stat" id="previewStatusStat" title="Status da prévia">
+                        <span class="preview-stat-icon">✓</span>
+                        <span>Atualizado</span>
+                    </div>
+                    <div class="preview-stat" id="previewContentStat" title="Conteúdo do comunicado">
+                        <span class="preview-stat-icon">📝</span>
+                        <span id="previewContentInfo">Vazio</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Container da Prévia -->
+            <div class="preview-container">
+                <div class="preview-wrapper" id="previewWrapper">
+                    <div id="previewContent">
+                        <div class="preview-empty">
+                            <div class="preview-empty-icon">📄</div>
+                            <h4>Nenhum conteúdo ainda</h4>
+                            <p>Preencha os campos ao lado para visualizar</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="previewError" style="display:none; color:#ef4444; text-align:center; margin-top:10px; font-size:14px;"></div>
+            </div>
+            
+            <!-- Footer da Prévia -->
+            <div class="preview-footer">
+                <div class="preview-dimensions">
+                    <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                    </svg>
+                    <span>1000 × 1300 px</span>
+                </div>
+                <div class="preview-zoom">
+                    <button type="button" class="zoom-btn" onclick="ajustarZoom(-0.1)" title="Diminuir zoom" aria-label="Diminuir zoom">−</button>
+                    <span class="zoom-level" id="zoomLevel">58%</span>
+                    <button type="button" class="zoom-btn" onclick="ajustarZoom(0.1)" title="Aumentar zoom" aria-label="Aumentar zoom">+</button>
+                    <button type="button" class="zoom-btn zoom-btn-fit" onclick="ajustarZoomParaCaber()" title="Ajustar zoom para caber na tela" aria-label="Ajustar zoom para caber na tela">Ajustar</button>
+                </div>
+            </div>
+            <div class="actions-container">
+                <div class="actions-title">Ações</div>
+                <div class="actions-grid">
+                    <div class="actions-row">
+                        <button type="button" class="action-btn btn-clear" onclick="limparFormulario()">
+                            <span class="icon">🗑️</span>
+                            <span>Limpar</span>
+                        </button>
+                        <button type="button" class="action-btn btn-draft" onclick="salvarRascunho()">
+                            <span class="icon">📄</span>
+                            <span>Salvar Rascunho</span>
+                        </button>
+                    </div>
+                    <button type="button" class="action-btn btn-accessibility" onclick="abrirModalAcessibilidade()">
+                        <span class="icon">♿</span>
+                        <span>#ParaTodosVerem</span>
+                    </button>
+                    <div class="actions-divider"></div>
+                    <button type="submit" class="action-btn btn-save" form="comunicadoForm">
+                        <span class="icon">💾</span>
+                        <span>Salvar e Gerar Imagem</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Modal #ParaTodosVerem -->
+    <div class="modal-overlay" id="modalAcessibilidade" onclick="if(event.target === this) fecharModalAcessibilidade()">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 46px; height: 46px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 3px 10px rgba(16, 185, 129, 0.3);">
+                        ♿
+                    </div>
+                    <div>
+                        <h3 style="margin: 0; font-size: 17px; color: #1e293b; font-weight: 700;">#ParaTodosVerem</h3>
+                        <p style="margin: 0; font-size: 12px; color: #64748b; margin-top: 3px;">Texto de acessibilidade formatado</p>
+                    </div>
+                </div>
+                <button type="button" class="modal-close" onclick="fecharModalAcessibilidade()">&times;</button>
+            </div>
+            
+            <div style="background: #f8fafc; padding: 18px; border-radius: 10px; border: 1px solid #e2e8f0; font-family: Verdana, sans-serif; font-size: 8pt; text-align: center; line-height: 1.8; color: #334155;" id="acessibilidadePreview">
+                <!-- Preview será inserido aqui -->
+            </div>
+            
+            <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 18px;">
+                <button type="button" class="btn btn-secondary" onclick="fecharModalAcessibilidade()">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="copiarTextoAcessibilidade(event)">📋 Copiar Texto</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer>
+        <img src="/static/img/logo/globo_h.png" alt="Globo">
+        <p>© Copyright 2000-2026 Globo Comunicação e Participações S.A.</p>
+    </footer>
+    <script src="/static/js/criar_comunicado.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<div style="width: 1000px; height: 1300px; {% if template and template.imagem_fundo %}background: url('/static/{{ template.imagem_fundo }}') center/cover no-repeat;{% else %}background: linear-gradient(90deg, #00bfff 0%, #1e90ff 25%, #6a5acd 75%, #8b5cf6 100%);{% endif %} position: relative; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Regular', sans-serif; color: white; border-radius: 8px; overflow: visible;">
+    <!-- Título -->
+    {% if titulo %}
+        {% if titulo.upper() == 'INDISPONIBILIDADE' %}
+            <!-- Caso especial: Indisponibilidade em duas linhas -->
+            <div style="position: absolute; left: {{ tipo_pos_x or '60' }}px; top: {{ tipo_pos_y or '80' }}px; max-width: 880px;">
+                <div style="font-size: {{ tipo_tamanho or '42' }}px; color: {{ configs.get('cor_titulo', '#FFFFFF') }}; font-weight: 700; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif; margin: 0; text-transform: uppercase; line-height: 1;">
+                    INDISPONIBILIDADE
+                </div>
+                <div style="font-size: {{ tipo_tamanho or '42' }}px; color: {{ configs.get('cor_titulo', '#FFFFFF') }}; font-weight: 700; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif; margin: 0; margin-top: 10px; text-transform: uppercase; line-height: 1;">
+                    DETECTADA
+                </div>
+            </div>
+        {% elif titulo.upper() == 'INSTABILIDADE' %}
+            <!-- Caso especial: Instabilidade em duas linhas -->
+            <div style="position: absolute; left: {{ tipo_pos_x or '60' }}px; top: {{ tipo_pos_y or '80' }}px; max-width: 880px;">
+                <div style="font-size: {{ tipo_tamanho or '42' }}px; color: {{ configs.get('cor_titulo', '#FFFFFF') }}; font-weight: 700; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif; margin: 0; text-transform: uppercase; line-height: 1;">
+                    INSTABILIDADE
+                </div>
+                <div style="font-size: {{ tipo_tamanho or '42' }}px; color: {{ configs.get('cor_titulo', '#FFFFFF') }}; font-weight: 700; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif; margin: 0; margin-top: 10px; text-transform: uppercase; line-height: 1;">
+                    DETECTADA
+                </div>
+            </div>
+        {% elif titulo.upper() == 'DEGRADAÇÃO' %}
+            <!-- Caso especial: Degradação em duas linhas -->
+            <div style="position: absolute; left: {{ tipo_pos_x or '60' }}px; top: {{ tipo_pos_y or '80' }}px; max-width: 880px;">
+                <div style="font-size: {{ tipo_tamanho or '42' }}px; color: {{ configs.get('cor_titulo', '#FFFFFF') }}; font-weight: 700; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif; margin: 0; text-transform: uppercase; line-height: 1;">
+                    DEGRADAÇÃO
+                </div>
+                <div style="font-size: {{ tipo_tamanho or '42' }}px; color: {{ configs.get('cor_titulo', '#FFFFFF') }}; font-weight: 700; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif; margin: 0; margin-top: 10px; text-transform: uppercase; line-height: 1;">
+                    DETECTADA
+                </div>
+            </div>
+        {% elif titulo.upper() == 'NORMALIZAÇÃO' %}
+            <!-- Caso especial: Normalização em duas linhas -->
+            <div style="position: absolute; left: {{ tipo_pos_x or '60' }}px; top: {{ tipo_pos_y or '80' }}px; max-width: 880px;">
+                <div style="font-size: {{ tipo_tamanho or '42' }}px; color: {{ configs.get('cor_titulo', '#FFFFFF') }}; font-weight: 700; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif; margin: 0; text-transform: uppercase; line-height: 1;">
+                    AMBIENTE
+                </div>
+                <div style="font-size: {{ tipo_tamanho or '42' }}px; color: {{ configs.get('cor_titulo', '#FFFFFF') }}; font-weight: 700; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif; margin: 0; margin-top: 10px; text-transform: uppercase; line-height: 1;">
+                    NORMALIZADO
+                </div>
+            </div>
+        {% else %}
+            <h1 style="position: absolute; left: {{ tipo_pos_x or '60' }}px; top: {{ tipo_pos_y or '80' }}px; font-size: {{ tipo_tamanho or '42' }}px; color: {{ configs.get('cor_titulo', '#FFFFFF') }}; font-weight: 700; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif; margin: 0; text-transform: uppercase; max-width: 880px;">
+                {{ titulo }}
+            </h1>
+        {% endif %}
+    {% endif %}
+
+    <!-- Subtítulo -->
+    {% if subtitulo %}
+    <h2 id="subtitulo-preview" style="position: absolute; {% if subtitulo_pos_x and subtitulo_pos_x != '0' %}left: {{ subtitulo_pos_x }}px;{% else %}left: 50%; transform: translateX(-50%);{% endif %} top: {{ subtitulo_pos_y or '180' }}px; font-size: {{ subtitulo_tamanho or '32' }}px; color: #000000; font-weight: 700; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif; margin: 0; width: 880px; max-width: 880px; padding: 0; line-height: 1.4; {% if not subtitulo_pos_x or subtitulo_pos_x == '0' %}text-align: center;{% endif %} word-wrap: break-word; word-break: break-word; box-sizing: border-box;">
+        {{ subtitulo }}
+    </h2>
+    {% endif %}
+
+    <!-- Corpo -->
+    {% if corpo %}
+    <style>
+        /* Estilos para formatação no corpo do texto */
+        .corpo-texto b,
+        .corpo-texto strong {
+            font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Bold', sans-serif !important;
+            font-weight: 700 !important;
+        }
+        .corpo-texto i,
+        .corpo-texto em {
+            font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Regular', sans-serif !important;
+            font-style: italic !important;
+        }
+    </style>
+    <div style="position: absolute; left: {{ corpo_pos_x or '60' }}px; top: {{ corpo_pos_y or '510' }}px; width: 880px; background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 8px;">
+        <div class="corpo-texto" style="font-size: {{ corpo_tamanho or '24' }}px; color: #000000; line-height: 1.6; text-align: {{ corpo_alinhamento or 'justify' }}; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Regular', sans-serif;">
+            {{ corpo | safe }}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Rodapé / Informações Adicionais -->
+    {% if rodape %}
+    <p id="rodape-preview" style="position: absolute; left: 50%; top: {{ rodape_pos_y or '1000' }}px; transform: translateX(-50%); width: 980px; max-width: 980px; font-size: {{ rodape_tamanho or '24' }}px; color: #000000; margin: 0; padding: 0; line-height: 1.5; text-align: center; word-wrap: break-word; word-break: break-word; box-sizing: border-box; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Regular', sans-serif;">
+        {{ rodape | safe }}
+    </p>
+    {% endif %}
+
+    <!-- Público Alvo -->
+    {% if publico_alvo %}
+    <p style="position: absolute; left: {{ publico_alvo_pos_x or '60' }}px; top: {{ publico_alvo_pos_y or '1120' }}px; max-width: 880px; font-size: {{ publico_alvo_tamanho or '16' }}px; color: #000000; margin: 0; font-family: 'Globo Corporativa', 'GlobotipoCorporativa-Regular', sans-serif;">
+        {{ publico_alvo }}
+    </p>
+    {% endif %}
+
+    <!-- Ícone de check (se contiver "normalizado") -->
+    {% if 'normalizado' in titulo.lower() %}
+    <div style="position: absolute; top: 20px; right: 20px; width: 80px; height: 80px; border: 4px solid white; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+        <svg width="40" height="40" viewBox="0 0 100 100" style="fill: none; stroke: white; stroke-width: 12; stroke-linecap: round;">
+            <polyline points="20,50 40,70 80,30" />
+        </svg>
+    </div>
+    {% endif %}
+</div>
