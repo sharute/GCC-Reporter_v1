@@ -27,7 +27,8 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', secrets.token_urlsafe(32))
 # Para SQLite, usar caminho absoluto para evitar problemas com diretório de trabalho
 default_db_path = os.path.join(BASE_DIR, 'database', 'comunicados.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URI', f'sqlite:///{default_db_path}')
+print(f"DEBUG: Tentando abrir o banco em: {default_db_path}")
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////home/gcc/gccreporter/GCC-Reporter_v1/database/comunicados.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.getenv('UPLOAD_FOLDER', 'static/uploads')
 app.config['DEBUG'] = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
